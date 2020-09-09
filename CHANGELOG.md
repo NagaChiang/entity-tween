@@ -3,3 +3,5 @@
 ## [Unreleased]
 
 ### Added
+
+- `Ease` utilities for interpolation

@@ -1,0 +1,21 @@
+{
+    "name": "com.timespawn.entitytween",
+    "version": "0.1.0",
+    "displayName": "Entity Tween",
+    "description": "Tween library for Unity ECS/DOTS.",
+    "unity": "2020.1",
+    "dependencies": {
+
+    },
+    "author": {
+        "name": "Naga Chiang",
+        "email": "nagachiangdev@gmail.com",
+        "url": "https://nagachiang.github.io"
+    },
+    "keywords": [
+        "ECS",
+        "DOTS",
+        "Entity",
+        "Tween"
+    ]
+}

@@ -1,7 +1,10 @@
 {
     "name": "Timespawn.EntityTween",
     "references": [
-        "Unity.Mathematics"
+        "Unity.Entities",
+        "Unity.Mathematics",
+        "Unity.Collections",
+        "Unity.Transforms"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

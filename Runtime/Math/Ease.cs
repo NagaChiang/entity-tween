@@ -10,6 +10,18 @@ namespace Timespawn.EntityTween.Math
         SmoothStep,
     }
 
+    public struct EaseDesc
+    {
+        public EaseType Type;
+        public int Exponent;
+
+        public EaseDesc(EaseType type, int exponent)
+        {
+            Type = type;
+            Exponent = exponent;
+        }
+    }
+
     public static class Ease
     {
         public delegate float EaseFunction(float t);

@@ -6,4 +6,4 @@
 
 - `Ease` utilities for interpolation
 - Tween API using `EntityManager`, `EntityCommandBuffer` and `ParallelWriter`
-- `Translation` tween support
+- `Translation` and `Rotation` tween support

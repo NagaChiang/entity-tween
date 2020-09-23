@@ -8,4 +8,8 @@ Entity compatible tween library for Unity ECS/DOTS. The implementation of `Ease`
 
 ## Usage
 
+## Concept
+
 ## Known Issues
+
+### Generic Jobs Not Supported in Burst

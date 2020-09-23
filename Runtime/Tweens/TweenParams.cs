@@ -2,7 +2,7 @@
 
 namespace Timespawn.EntityTween
 {
-    internal struct TweenParams
+    public struct TweenParams
     {
         public EaseType EaseType;
         public byte EaseExponent;
@@ -10,13 +10,13 @@ namespace Timespawn.EntityTween
         public bool IsPingPong;
         public byte LoopCount;
 
-        public TweenParams(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount)
+        public TweenParams(EaseType easeType, int easeExponent, float duration, bool isPingPong, int loopCount)
         {
             EaseType = easeType;
-            EaseExponent = easeExponent;
+            EaseExponent = (byte) easeExponent;
             Duration = duration;
             IsPingPong = isPingPong;
-            LoopCount = loopCount;
+            LoopCount = (byte) loopCount;
         }
     }
 }

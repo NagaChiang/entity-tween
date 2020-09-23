@@ -10,17 +10,50 @@ namespace Timespawn.EntityTween.Tweens
         public static void Move(
             EntityManager entityManager,
             Entity entity,
-            float duration,
             float3 start, 
             float3 end, 
+            float duration,
             EaseDesc easeDesc = default,
             bool isPingPong = false, 
             int loopCount = 1)
         {
             AssertParams(easeDesc.Exponent, loopCount);
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, (byte) easeDesc.Exponent, duration, isPingPong, (byte) loopCount);
+            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
             entityManager.AddComponentData(entity, new TweenTranslationCommand(tweenParams, start, end));
+        }
+
+        public static void Move(
+            EntityCommandBuffer commandBuffer,
+            Entity entity,
+            float3 start, 
+            float3 end, 
+            float duration,
+            EaseDesc easeDesc = default,
+            bool isPingPong = false, 
+            int loopCount = 1)
+        {
+            AssertParams(easeDesc.Exponent, loopCount);
+
+            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            commandBuffer.AddComponent(entity, new TweenTranslationCommand(tweenParams, start, end));
+        }
+
+        public static void Move(
+            EntityCommandBuffer.ParallelWriter parallelWriter,
+            int sortKey,
+            Entity entity,
+            float3 start, 
+            float3 end, 
+            float duration,
+            EaseDesc easeDesc = default,
+            bool isPingPong = false, 
+            int loopCount = 1)
+        {
+            AssertParams(easeDesc.Exponent, loopCount);
+
+            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            parallelWriter.AddComponent(sortKey, entity, new TweenTranslationCommand(tweenParams, start, end));
         }
 
         private static void AssertParams(int easeExponent, int loopCount)

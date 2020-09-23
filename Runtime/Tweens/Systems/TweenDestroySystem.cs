@@ -8,11 +8,10 @@ namespace Timespawn.EntityTween.Tweens
         where TTweenInfo : struct, IComponentData, ITweenId
     {
         [BurstCompatible]
-        private struct DestroyJob<TInfo> : IJobChunk
-            where TInfo : struct, IComponentData, ITweenId
+        private struct DestroyJob : IJobChunk
         {
             [ReadOnly] public EntityTypeHandle EntityType;
-            [ReadOnly] public ComponentTypeHandle<TInfo> IdType;
+            [ReadOnly] public ComponentTypeHandle<TTweenInfo> IdType;
             
             [NativeDisableParallelForRestriction] public BufferFromEntity<Tween> TweenBufferFromEntity;
 
@@ -21,7 +20,7 @@ namespace Timespawn.EntityTween.Tweens
             public void Execute(ArchetypeChunk chunk, int chunkIndex, int firstEntityIndex)
             {
                 NativeArray<Entity> entities = chunk.GetNativeArray(EntityType);
-                NativeArray<TInfo> infos = chunk.GetNativeArray(IdType);
+                NativeArray<TTweenInfo> infos = chunk.GetNativeArray(IdType);
                 for (int i = 0; i < entities.Length; i++)
                 {
                     Entity entity = entities[i];
@@ -57,7 +56,7 @@ namespace Timespawn.EntityTween.Tweens
         {
             EndSimulationEntityCommandBufferSystem endSimECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
 
-            DestroyJob<TTweenInfo> job = new DestroyJob<TTweenInfo>
+            DestroyJob job = new DestroyJob
             {
                 EntityType = GetEntityTypeHandle(),
                 IdType = GetComponentTypeHandle<TTweenInfo>(true),
@@ -71,4 +70,6 @@ namespace Timespawn.EntityTween.Tweens
     }
 
     internal class TweenTranslationDestroySystem : TweenDestroySystem<TweenTranslation> {}
+    internal class TweenRotationDestroySystem : TweenDestroySystem<TweenRotation> {}
+    internal class TweenScaleDestroySystem : TweenDestroySystem<TweenScale> {}
 }

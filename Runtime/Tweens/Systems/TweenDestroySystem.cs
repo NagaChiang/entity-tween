@@ -14,8 +14,9 @@ namespace Timespawn.EntityTween.Tweens
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TInfo> IdType;
             
-            public BufferFromEntity<Tween> TweenBufferFromEntity;
-            public EntityCommandBuffer CommandBuffer;
+            [NativeDisableParallelForRestriction] public BufferFromEntity<Tween> TweenBufferFromEntity;
+
+            public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
             public void Execute(ArchetypeChunk chunk, int chunkIndex, int firstEntityIndex)
             {
@@ -32,14 +33,14 @@ namespace Timespawn.EntityTween.Tweens
                         if (infos[i].GetTweenId() == tween.Id && tween.IsPendingDestroy())
                         {
                             tweenBuffer.RemoveAt(j);
-                            CommandBuffer.RemoveComponent<TTweenInfo>(entity);
+                            ParallelWriter.RemoveComponent<TTweenInfo>(chunkIndex, entity);
                             break;
                         }
                     }
 
                     if (tweenBuffer.Length == 0)
                     {
-                        CommandBuffer.RemoveComponent<Tween>(entity);
+                        ParallelWriter.RemoveComponent<Tween>(chunkIndex, entity);
                     }
                 }
             }
@@ -55,18 +56,17 @@ namespace Timespawn.EntityTween.Tweens
         protected override void OnUpdate()
         {
             EndSimulationEntityCommandBufferSystem endSimECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
-            EntityCommandBuffer commandBuffer = endSimECBSystem.CreateCommandBuffer();
 
             DestroyJob<TTweenInfo> job = new DestroyJob<TTweenInfo>
             {
                 EntityType = GetEntityTypeHandle(),
                 IdType = GetComponentTypeHandle<TTweenInfo>(true),
                 TweenBufferFromEntity = GetBufferFromEntity<Tween>(),
-                CommandBuffer = commandBuffer,
+                ParallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter(),
             };
 
-            Dependency = job.ScheduleSingle(TweenInfoQuery, Dependency);
-            Dependency.Complete();
+            Dependency = job.ScheduleParallel(TweenInfoQuery, Dependency);
+            endSimECBSystem.AddJobHandleForProducer(Dependency);
         }
     }
 

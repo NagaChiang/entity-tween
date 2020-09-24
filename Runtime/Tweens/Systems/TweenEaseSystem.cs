@@ -11,19 +11,21 @@ namespace Timespawn.EntityTween
         {
             float deltaTime = Time.DeltaTime;
 
-            Entities.ForEach((ref DynamicBuffer<Tween> tweenBuffer) => 
-            {
-                for (int i = 0; i < tweenBuffer.Length; i++)
+            Entities
+                .WithNone<TweenPause>()
+                .ForEach((ref DynamicBuffer<Tween> tweenBuffer) =>
                 {
-                    Tween tween = tweenBuffer[i];
-                    tween.Time += tween.IsReverting ? -deltaTime : deltaTime;
+                    for (int i = 0; i < tweenBuffer.Length; i++)
+                    {
+                        Tween tween = tweenBuffer[i];
+                        tween.Time += tween.IsReverting ? -deltaTime : deltaTime;
 
-                    float normalizedTime = tween.GetNormalizedTime();
-                    tween.EasePercentage = Ease.CalculatePercentage(normalizedTime, tween.EaseType, tween.EaseExponent);
+                        float normalizedTime = tween.GetNormalizedTime();
+                        tween.EasePercentage = Ease.CalculatePercentage(normalizedTime, tween.EaseType, tween.EaseExponent);
 
-                    tweenBuffer[i] = tween;
-                }
-            }).ScheduleParallel();
+                        tweenBuffer[i] = tween;
+                    }
+                }).ScheduleParallel();
         }
     }
 }

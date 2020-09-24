@@ -154,6 +154,36 @@ namespace Timespawn.EntityTween.Tweens
             parallelWriter.AddComponent(sortKey, entity, new TweenScaleCommand(tweenParams, start, end));
         }
 
+        public static void Pause(EntityManager entityManager, Entity entity)
+        {
+            entityManager.AddComponent<TweenPause>(entity);
+        }
+
+        public static void Pause(EntityCommandBuffer commandBuffer, Entity entity)
+        {
+            commandBuffer.AddComponent<TweenPause>(entity);
+        }
+
+        public static void Pause(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity)
+        {
+            parallelWriter.AddComponent<TweenPause>(sortKey, entity);
+        }
+
+        public static void Resume(EntityManager entityManager, Entity entity)
+        {
+            entityManager.AddComponent<TweenResumeCommand>(entity);
+        }
+
+        public static void Resume(EntityCommandBuffer commandBuffer, Entity entity)
+        {
+            commandBuffer.AddComponent<TweenResumeCommand>(entity);
+        }
+
+        public static void Resume(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity)
+        {
+            parallelWriter.AddComponent<TweenResumeCommand>(sortKey, entity);
+        }
+
         private static void AssertParams(int easeExponent, int loopCount)
         {
             Debug.Assert(byte.MinValue <= easeExponent && easeExponent <= byte.MaxValue, $"Exponent of ease function should be between {byte.MinValue} - {byte.MaxValue}.");

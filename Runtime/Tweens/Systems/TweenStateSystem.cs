@@ -8,50 +8,52 @@ namespace Timespawn.EntityTween.Tweens
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<Tween> tweenBuffer) => 
-            {
-                for (int i = tweenBuffer.Length - 1; i >= 0 ; i--)
+            Entities
+                .WithNone<TweenPause>()
+                .ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<Tween> tweenBuffer) =>
                 {
-                    Tween tween = tweenBuffer[i];
-
-                    bool isInfiniteLoop = tween.LoopCount == Tween.LOOP_COUNT_INFINITE;
-                    float normalizedTime = tween.GetNormalizedTime();
-                    if (tween.IsReverting && normalizedTime <= 0.0f)
+                    for (int i = tweenBuffer.Length - 1; i >= 0; i--)
                     {
-                        if (!isInfiniteLoop)
-                        {
-                            tween.LoopCount--;
-                        }
+                        Tween tween = tweenBuffer[i];
 
-                        tween.IsReverting = false;
-                        tween.Time = 0.0f;
-                    }
-                    else if (!tween.IsReverting && normalizedTime >= 1.0f)
-                    {
-                        if (tween.IsPingPong)
-                        {
-                            tween.IsReverting = true;
-                            tween.Time = tween.Duration / 2.0f;
-                        }
-                        else
+                        bool isInfiniteLoop = tween.LoopCount == Tween.LOOP_COUNT_INFINITE;
+                        float normalizedTime = tween.GetNormalizedTime();
+                        if (tween.IsReverting && normalizedTime <= 0.0f)
                         {
                             if (!isInfiniteLoop)
                             {
                                 tween.LoopCount--;
                             }
 
+                            tween.IsReverting = false;
                             tween.Time = 0.0f;
                         }
-                    }
+                        else if (!tween.IsReverting && normalizedTime >= 1.0f)
+                        {
+                            if (tween.IsPingPong)
+                            {
+                                tween.IsReverting = true;
+                                tween.Time = tween.Duration / 2.0f;
+                            }
+                            else
+                            {
+                                if (!isInfiniteLoop)
+                                {
+                                    tween.LoopCount--;
+                                }
 
-                    if (!isInfiniteLoop && tween.LoopCount == 0)
-                    {
-                        tween.SetPendingDestroy();
-                    }
+                                tween.Time = 0.0f;
+                            }
+                        }
 
-                    tweenBuffer[i] = tween;
-                }
-            }).ScheduleParallel();
+                        if (!isInfiniteLoop && tween.LoopCount == 0)
+                        {
+                            tween.SetPendingDestroy();
+                        }
+
+                        tweenBuffer[i] = tween;
+                    }
+                }).ScheduleParallel();
         }
     }
 }

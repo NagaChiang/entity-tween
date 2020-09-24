@@ -25,12 +25,11 @@ namespace Timespawn.EntityTween.Tweens
 
             public void Execute(ArchetypeChunk chunk, int chunkIndex, int firstEntityIndex)
             {
-                NativeArray<Entity> entities = chunk.GetNativeArray(EntityType);
-                NativeArray<TTweenCommand> commands = chunk.GetNativeArray(TweenCommandType);
-
                 bool hasTweenBuffer = chunk.Has(TweenBufferType);
                 bool hasRequiredType = chunk.Has(RequiredType);
 
+                NativeArray<Entity> entities = chunk.GetNativeArray(EntityType);
+                NativeArray<TTweenCommand> commands = chunk.GetNativeArray(TweenCommandType);
                 for (int i = 0; i < entities.Length; i++)
                 {
                     Entity entity = entities[i];

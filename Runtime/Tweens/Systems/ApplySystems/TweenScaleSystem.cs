@@ -10,18 +10,20 @@ namespace Timespawn.EntityTween
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((ref NonUniformScale scale, in DynamicBuffer<Tween> tweenBuffer, in TweenScale tweenInfo) =>
-            {
-                for (int i = 0; i < tweenBuffer.Length; i++)
+            Entities
+                .WithNone<TweenPause>()
+                .ForEach((ref NonUniformScale scale, in DynamicBuffer<Tween> tweenBuffer, in TweenScale tweenInfo) =>
                 {
-                    Tween tween = tweenBuffer[i];
-                    if (tween.Id == tweenInfo.Id)
+                    for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        scale.Value = math.lerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);
-                        break;
+                        Tween tween = tweenBuffer[i];
+                        if (tween.Id == tweenInfo.Id)
+                        {
+                            scale.Value = math.lerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);
+                            break;
+                        }
                     }
-                }
-            }).ScheduleParallel();
+                }).ScheduleParallel();
         }
     }
 }

@@ -10,18 +10,20 @@ namespace Timespawn.EntityTween
     {
         protected override void OnUpdate()
         {
-            Entities.ForEach((ref Translation translation, in DynamicBuffer<Tween> tweenBuffer, in TweenTranslation tweenInfo) =>
-            {
-                for (int i = 0; i < tweenBuffer.Length; i++)
+            Entities
+                .WithNone<TweenPause>()
+                .ForEach((ref Translation translation, in DynamicBuffer<Tween> tweenBuffer, in TweenTranslation tweenInfo) =>
                 {
-                    Tween tween = tweenBuffer[i];
-                    if (tween.Id == tweenInfo.Id)
+                    for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        translation.Value = math.lerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);
-                        break;
+                        Tween tween = tweenBuffer[i];
+                        if (tween.Id == tweenInfo.Id)
+                        {
+                            translation.Value = math.lerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);
+                            break;
+                        }
                     }
-                }
-            }).ScheduleParallel();
+                }).ScheduleParallel();
         }
     }
 }

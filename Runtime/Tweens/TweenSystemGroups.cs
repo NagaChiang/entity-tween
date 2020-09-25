@@ -8,6 +8,8 @@ namespace Timespawn.EntityTween.Tweens
     // - TweenEaseSystem
     // - TweenApplySystemGroup
     //   - TweenTranslationSystem
+    //   - TweenRotationSystem
+    //   - TweenScaleSystem
     //   - etc.
     // - TweenStateSyetem
     // - TweenResumeSystem

@@ -6,7 +6,7 @@ using Unity.Transforms;
 namespace Timespawn.EntityTween.Tweens
 {
     [UpdateInGroup(typeof(TweenGenerateSystemGroup))]
-    internal abstract class TweenGenerationSystem<TTweenCommand, TTweenInfo, TRequired, TTweenInfoValue> : SystemBase
+    internal abstract class TweenGenerateSystem<TTweenCommand, TTweenInfo, TRequired, TTweenInfoValue> : SystemBase
         where TTweenCommand : struct, IComponentData, ITweenParams, ITweenInfo<TTweenInfoValue>
         where TTweenInfo : struct, IComponentData, ITweenId, ITweenInfo<TTweenInfoValue>
         where TRequired : struct, IComponentData
@@ -86,7 +86,7 @@ namespace Timespawn.EntityTween.Tweens
         }
     }
 
-    internal class TweenTranslationGenerationSystem : TweenGenerationSystem<TweenTranslationCommand, TweenTranslation, Translation, float3> {}
-    internal class TweenRotationGenerationSystem : TweenGenerationSystem<TweenRotationCommand, TweenRotation, Rotation, quaternion> {}
-    internal class TweenScaleGenerationSystem : TweenGenerationSystem<TweenScaleCommand, TweenScale, NonUniformScale, float3> {}
+    internal class TweenTranslationGenerateSystem : TweenGenerateSystem<TweenTranslationCommand, TweenTranslation, Translation, float3> {}
+    internal class TweenRotationGenerateSystem : TweenGenerateSystem<TweenRotationCommand, TweenRotation, Rotation, quaternion> {}
+    internal class TweenScaleGenerateSystem : TweenGenerateSystem<TweenScaleCommand, TweenScale, NonUniformScale, float3> {}
 }

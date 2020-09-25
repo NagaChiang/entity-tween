@@ -1,4 +1,7 @@
-﻿using Timespawn.EntityTween.Math;
+﻿using System;
+using System.Reflection;
+using Timespawn.EntityTween.Math;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -182,6 +185,21 @@ namespace Timespawn.EntityTween.Tweens
         public static void Resume(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity)
         {
             parallelWriter.AddComponent<TweenResumeCommand>(sortKey, entity);
+        }
+
+        public static void Stop(EntityManager entityManager, Entity entity)
+        {
+            entityManager.AddComponent<TweenStopCommand>(entity);
+        }
+
+        public static void Stop(EntityCommandBuffer commandBuffer, Entity entity)
+        {
+            commandBuffer.AddComponent<TweenStopCommand>(entity);
+        }
+
+        public static void Stop(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity)
+        {
+            parallelWriter.AddComponent<TweenStopCommand>(sortKey, entity);
         }
 
         private static void AssertParams(int easeExponent, int loopCount)

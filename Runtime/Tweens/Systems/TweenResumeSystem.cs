@@ -2,8 +2,8 @@
 
 namespace Timespawn.EntityTween.Tweens
 {
-    [UpdateInGroup(typeof(TweenSystemGroup))]
-    [UpdateAfter(typeof(TweenApplySystemGroup))]
+    [UpdateInGroup(typeof(TweenSimulationSystemGroup))]
+    [UpdateAfter(typeof(TweenStateSystem))]
     internal class TweenResumeSystem : SystemBase
     {
         protected override void OnUpdate()

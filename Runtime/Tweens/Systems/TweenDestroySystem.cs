@@ -49,17 +49,7 @@ namespace Timespawn.EntityTween.Tweens
 
         protected override void OnCreate()
         {
-            TweenInfoQuery = GetEntityQuery(new EntityQueryDesc
-            {
-                All = new []
-                {
-                    ComponentType.ReadOnly<TTweenInfo>(),
-                },
-                None = new []
-                {
-                    ComponentType.ReadOnly<TweenPause>(), 
-                },
-            });
+            TweenInfoQuery = GetEntityQuery(ComponentType.ReadOnly<TTweenInfo>());
         }
 
         protected override void OnUpdate()

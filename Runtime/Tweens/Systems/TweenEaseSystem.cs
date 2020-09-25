@@ -4,7 +4,7 @@ using Unity.Entities;
 
 namespace Timespawn.EntityTween
 {
-    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateInGroup(typeof(TweenSimulationSystemGroup))]
     internal class TweenEaseSystem : SystemBase
     {
         protected override void OnUpdate()

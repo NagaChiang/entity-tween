@@ -6,4 +6,4 @@
 
 - `Ease` utilities for interpolation
 - `Translation`, `Rotation` and `Scale` tween support
-- Pause/resume tweens
+- Pause/resume/stop tweens

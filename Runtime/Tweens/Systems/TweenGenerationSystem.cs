@@ -5,7 +5,7 @@ using Unity.Transforms;
 
 namespace Timespawn.EntityTween.Tweens
 {
-    [UpdateInGroup(typeof(TweenGenerationSystemGroup))]
+    [UpdateInGroup(typeof(TweenGenerateSystemGroup))]
     internal abstract class TweenGenerationSystem<TTweenCommand, TTweenInfo, TRequired, TTweenInfoValue> : SystemBase
         where TTweenCommand : struct, IComponentData, ITweenParams, ITweenInfo<TTweenInfoValue>
         where TTweenInfo : struct, IComponentData, ITweenId, ITweenInfo<TTweenInfoValue>

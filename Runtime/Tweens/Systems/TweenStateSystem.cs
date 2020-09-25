@@ -2,7 +2,7 @@
 
 namespace Timespawn.EntityTween.Tweens
 {
-    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateInGroup(typeof(TweenSimulationSystemGroup))]
     [UpdateAfter(typeof(TweenApplySystemGroup))]
     internal class TweenStateSystem : SystemBase
     {

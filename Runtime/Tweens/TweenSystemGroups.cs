@@ -3,28 +3,30 @@
 namespace Timespawn.EntityTween.Tweens
 {
     // Update Order:
-    // - TweenGenerationSystemGroup
-    //   - TweenGenerationSystem(s)
+    // - TweenGenerateSystemGroup
+    //   - TweenGenerateSystem(s)
     // - TweenEaseSystem
     // - TweenApplySystemGroup
     //   - TweenTranslationSystem
     //   - etc.
+    // - TweenStateSyetem
     // - TweenResumeSystem
+    // - TweenStopSystem
     // - TweenDestroySystemGroup
     //   - TweenDestroySystem(s)
 
     [UpdateInGroup(typeof(SimulationSystemGroup))]
-    internal class TweenSystemGroup : ComponentSystemGroup {}
+    internal class TweenSimulationSystemGroup : ComponentSystemGroup {}
 
-    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateInGroup(typeof(TweenSimulationSystemGroup))]
     [UpdateBefore(typeof(TweenEaseSystem))]
-    internal class TweenGenerationSystemGroup : ComponentSystemGroup {}
+    internal class TweenGenerateSystemGroup : ComponentSystemGroup {}
 
-    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateInGroup(typeof(TweenSimulationSystemGroup))]
     [UpdateAfter(typeof(TweenEaseSystem))]
     internal class TweenApplySystemGroup : ComponentSystemGroup {}
 
-    [UpdateInGroup(typeof(TweenSystemGroup))]
+    [UpdateInGroup(typeof(TweenSimulationSystemGroup))]
     [UpdateAfter(typeof(TweenApplySystemGroup))]
     internal class TweenDestroySystemGroup : ComponentSystemGroup {}
 }

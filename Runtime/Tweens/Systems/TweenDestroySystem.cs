@@ -37,7 +37,7 @@ namespace Timespawn.EntityTween.Tweens
                         }
                     }
 
-                    if (tweenBuffer.Length == 0)
+                    if (tweenBuffer.IsEmpty)
                     {
                         ParallelWriter.RemoveComponent<Tween>(chunkIndex, entity);
                     }

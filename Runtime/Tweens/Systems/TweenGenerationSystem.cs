@@ -38,6 +38,7 @@ namespace Timespawn.EntityTween.Tweens
                     if (!hasTweenBuffer)
                     {
                         ParallelWriter.AddBuffer<Tween>(chunkIndex, entity);
+                        break;
                     }
 
                     if (!hasRequiredType)
@@ -45,13 +46,14 @@ namespace Timespawn.EntityTween.Tweens
                         ParallelWriter.AddComponent<TRequired>(chunkIndex, entity);
                     }
 
-                    Tween tween = new Tween(command.GetTweenParams(), ElapsedTime, chunkIndex);
+                    Tween tween = new Tween(command.GetTweenParams(), ElapsedTime, chunkIndex, GetHashCode());
+                    ParallelWriter.AppendToBuffer(chunkIndex, entity, tween);
+
                     TTweenInfo info = new TTweenInfo();
                     info.SetTweenId(tween.Id);
                     info.SetTweenInfo(command.GetTweenStart(), command.GetTweenEnd());
-
-                    ParallelWriter.AppendToBuffer(chunkIndex, entity, tween);
                     ParallelWriter.AddComponent(chunkIndex, entity, info);
+
                     ParallelWriter.RemoveComponent<TTweenCommand>(chunkIndex, entity);
                 }
             }

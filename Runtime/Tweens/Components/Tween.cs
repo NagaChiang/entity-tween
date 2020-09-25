@@ -19,7 +19,7 @@ namespace Timespawn.EntityTween.Tweens
         public byte LoopCount;
         public bool IsReverting;
 
-        internal Tween(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, double elapsedTime, int chunkIndex) : this()
+        internal Tween(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, double elapsedTime, int chunkIndex, int systemHash) : this()
         {
             EaseType = easeType;
             EaseExponent = easeExponent;
@@ -27,11 +27,11 @@ namespace Timespawn.EntityTween.Tweens
             IsPingPong = isPingPong;
             LoopCount = loopCount;
 
-            Id = GenerateId(elapsedTime, chunkIndex);
+            Id = GenerateId(elapsedTime, chunkIndex, systemHash);
         }
 
-        internal Tween(TweenParams tweenParams, double elapsedTime, int chunkIndex)
-            : this(tweenParams.EaseType, tweenParams.EaseExponent, tweenParams.Duration, tweenParams.IsPingPong, tweenParams.LoopCount, elapsedTime, chunkIndex)
+        internal Tween(TweenParams tweenParams, double elapsedTime, int chunkIndex, int systemHash)
+            : this(tweenParams.EaseType, tweenParams.EaseExponent, tweenParams.Duration, tweenParams.IsPingPong, tweenParams.LoopCount, elapsedTime, chunkIndex, systemHash)
         {
         }
 
@@ -66,7 +66,7 @@ namespace Timespawn.EntityTween.Tweens
             LoopCount = LOOP_COUNT_PENDING_DESTROY;
         }
 
-        private int GenerateId(double elapsedTime, int entityInQueryIndex)
+        private int GenerateId(double elapsedTime, int entityInQueryIndex, int systemHash)
         {
             unchecked
             {
@@ -77,6 +77,7 @@ namespace Timespawn.EntityTween.Tweens
                 hashCode = (hashCode * 397) ^ LoopCount.GetHashCode();
                 hashCode = (hashCode * 397) ^ elapsedTime.GetHashCode();
                 hashCode = (hashCode * 397) ^ entityInQueryIndex;
+                hashCode = (hashCode * 397) ^ systemHash;
 
                 return hashCode;
             }

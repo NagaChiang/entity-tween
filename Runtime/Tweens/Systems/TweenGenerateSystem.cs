@@ -16,6 +16,7 @@ namespace Timespawn.EntityTween.Tweens
         [BurstCompile]
         private struct GenerateJob : IJobChunk
         {
+            [ReadOnly] public int TweenInfoTypeIndex;
             [ReadOnly] public double ElapsedTime;
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TTweenCommand> TweenCommandType;
@@ -47,7 +48,7 @@ namespace Timespawn.EntityTween.Tweens
                         ParallelWriter.AddComponent<TRequired>(chunkIndex, entity);
                     }
 
-                    Tween tween = new Tween(command.GetTweenParams(), ElapsedTime, chunkIndex, GetHashCode());
+                    Tween tween = new Tween(command.GetTweenParams(), ElapsedTime, chunkIndex, TweenInfoTypeIndex);
                     ParallelWriter.AppendToBuffer(chunkIndex, entity, tween);
 
                     TTweenInfo info = new TTweenInfo();
@@ -74,6 +75,7 @@ namespace Timespawn.EntityTween.Tweens
 
             GenerateJob job = new GenerateJob
             {
+                TweenInfoTypeIndex = TypeManager.GetTypeIndex(typeof(TTweenInfo)),
                 ElapsedTime = elapsedTime,
                 EntityType = GetEntityTypeHandle(),
                 TweenCommandType = GetComponentTypeHandle<TTweenCommand>(true),

@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -12,7 +13,7 @@ namespace Timespawn.EntityTween.Tweens
         where TRequired : struct, IComponentData
         where TTweenInfoValue : struct
     {
-        [BurstCompatible]
+        [BurstCompile]
         private struct GenerateJob : IJobChunk
         {
             [ReadOnly] public double ElapsedTime;

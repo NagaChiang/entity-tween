@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Timespawn.EntityTween.Math;
-using Unity.Collections;
+﻿using Timespawn.EntityTween.Math;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;

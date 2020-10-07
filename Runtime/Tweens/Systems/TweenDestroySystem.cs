@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 
 namespace Timespawn.EntityTween.Tweens
@@ -7,7 +8,7 @@ namespace Timespawn.EntityTween.Tweens
     internal abstract class TweenDestroySystem<TTweenInfo> : SystemBase 
         where TTweenInfo : struct, IComponentData, ITweenId
     {
-        [BurstCompatible]
+        [BurstCompile]
         private struct DestroyJob : IJobChunk
         {
             [ReadOnly] public EntityTypeHandle EntityType;

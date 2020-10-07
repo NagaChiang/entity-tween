@@ -3,8 +3,8 @@
     "references": [
         "Unity.Entities",
         "Unity.Mathematics",
-        "Unity.Collections",
-        "Unity.Transforms"
+        "Unity.Transforms",
+        "Unity.Burst"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

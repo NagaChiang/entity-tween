@@ -1,21 +1,23 @@
 {
-    "name": "com.timespawn.entitytween",
-    "version": "0.1.0",
-    "displayName": "Entity Tween",
-    "description": "Tween library for Unity ECS/DOTS.",
-    "unity": "2020.1",
-    "dependencies": {
-
-    },
-    "author": {
-        "name": "Naga Chiang",
-        "email": "nagachiangdev@gmail.com",
-        "url": "https://nagachiang.github.io"
-    },
-    "keywords": [
-        "ECS",
-        "DOTS",
-        "Entity",
-        "Tween"
-    ]
+  "name": "com.timespawn.entitytween",
+  "version": "0.1.0",
+  "displayName": "Entity Tween",
+  "description": "Entity compatible tween library for Unity ECS/DOTS.",
+  "unity": "2020.1",
+  "dependencies": {
+    "com.unity.entities": "0.14.0-preview.18",
+    "com.unity.burst": "1.3.6",
+    "com.unity.mathematics": "1.2.1"
+  },
+  "author": {
+    "name": "Timespawn",
+    "email": "nagachiangdev@gmail.com",
+    "url": "https://nagachiang.github.io"
+  },
+  "keywords": [
+    "ECS",
+    "DOTS",
+    "Entity",
+    "Tween"
+  ]
 }

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fix
+
+- Typo "Crossfade"
+
 ## [0.1.0] - 2020.10.08
 
 ### Added

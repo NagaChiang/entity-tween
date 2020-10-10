@@ -40,7 +40,7 @@ Entity compatible tween library for Unity ECS/DOTS.
     - Smooth start
     - Smooth stop
     - Smooth step
-    - Cross fade
+    - Crossfade
 
 ## Dependency
 

@@ -89,6 +89,8 @@ To update existing Entity Tween package to the latest, remove the dependency on 
 }
 ```
 
+For more information, please visit [Unity documentation](https://docs.unity3d.com/2020.1/Documentation/Manual/upm-git.html).
+
 ## Examples
 
 The main entry point of the library is the `EntityTween` class. All functionality have overloads to support `EntityManager`, `EntityCommandBuffer` and `EntityCommandBuffer.ParallelWriter`.

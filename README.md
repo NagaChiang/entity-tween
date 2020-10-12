@@ -161,3 +161,7 @@ For example, `TweenTranslationSystem` takes `Tween` and `TweenTranslation` and i
 `TweenDestroySystem` is also an abstract generic system for each type of tween to implement, which destroys `Tween` marked by `TweenStateSystem` earlier and its corresponding tween data component.
 
 For example, `TweenTranslationDestroySystem` will be responsible for destroying `Tween` and `TweenTranslation`.
+
+## Donation
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C12EHR2)

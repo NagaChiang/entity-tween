@@ -28,7 +28,7 @@ Entity compatible tween library for Unity ECS/DOTS.
 
 ## Features
 
-- Supporting components
+- Supported components
     - `Translation`
     - `Rotation`
     - `NonUniformScale`

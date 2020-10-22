@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## Added
+
+- CI with GitHub Actions
+- `Editor.BuildUtils` for building the default scene with CI
+
 ### Fix
 
 - Typo "Crossfade"

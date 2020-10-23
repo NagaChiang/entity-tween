@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2020.10.23
+
 ### Added
 
 - GitHub Actions to build the default scene for Win64

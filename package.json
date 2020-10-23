@@ -1,6 +1,6 @@
 {
   "name": "com.timespawn.entitytween",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "Entity Tween",
   "description": "Entity compatible tween library for Unity ECS/DOTS.",
   "unity": "2020.1",

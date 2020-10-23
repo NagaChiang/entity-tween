@@ -14,7 +14,7 @@ namespace Timespawn.EntityTween.Tweens
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TTweenInfo> InfoType;
 
-            [NativeDisableParallelForRestriction] public BufferFromEntity<Tween> TweenBufferFromEntity;
+            [NativeDisableParallelForRestriction] public BufferFromEntity<TweenState> TweenBufferFromEntity;
 
             public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
@@ -26,10 +26,10 @@ namespace Timespawn.EntityTween.Tweens
                 {
                     Entity entity = entities[i];
                     
-                    DynamicBuffer<Tween> tweenBuffer = TweenBufferFromEntity[entity];
+                    DynamicBuffer<TweenState> tweenBuffer = TweenBufferFromEntity[entity];
                     for (int j = 0; j < tweenBuffer.Length; j++)
                     {
-                        Tween tween = tweenBuffer[j];
+                        TweenState tween = tweenBuffer[j];
                         if (infos[i].GetTweenId() == tween.Id && tween.IsPendingDestroy())
                         {
                             tweenBuffer.RemoveAt(j);
@@ -40,7 +40,7 @@ namespace Timespawn.EntityTween.Tweens
 
                     if (tweenBuffer.IsEmpty)
                     {
-                        ParallelWriter.RemoveComponent<Tween>(chunkIndex, entity);
+                        ParallelWriter.RemoveComponent<TweenState>(chunkIndex, entity);
                     }
                 }
             }
@@ -61,7 +61,7 @@ namespace Timespawn.EntityTween.Tweens
             {
                 EntityType = GetEntityTypeHandle(),
                 InfoType = GetComponentTypeHandle<TTweenInfo>(true),
-                TweenBufferFromEntity = GetBufferFromEntity<Tween>(),
+                TweenBufferFromEntity = GetBufferFromEntity<TweenState>(),
                 ParallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter(),
             };
 

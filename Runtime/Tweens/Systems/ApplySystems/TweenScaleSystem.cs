@@ -12,11 +12,11 @@ namespace Timespawn.EntityTween
         {
             Entities
                 .WithNone<TweenPause>()
-                .ForEach((ref NonUniformScale scale, in DynamicBuffer<Tween> tweenBuffer, in TweenScale tweenInfo) =>
+                .ForEach((ref NonUniformScale scale, in DynamicBuffer<TweenState> tweenBuffer, in TweenScale tweenInfo) =>
                 {
                     for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        Tween tween = tweenBuffer[i];
+                        TweenState tween = tweenBuffer[i];
                         if (tween.Id == tweenInfo.Id)
                         {
                             scale.Value = math.lerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);

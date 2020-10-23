@@ -1,0 +1,47 @@
+name: Unity CI
+on: push
+jobs:
+  build:
+    name: Build (${{ matrix.unityVersion }}, ${{ matrix.platform }})
+    runs-on: ubuntu-latest
+    container: gableroux/unity3d:${{ matrix.unityVersion }}-${{ matrix.platform }}
+    env:
+      unityCommand: /opt/Unity/Editor/Unity -batchmode -nographics -logfile /dev/stdout -quit
+      projectPath: test-project
+      buildPath: build-${{ matrix.unityVersion }}-${{ matrix.platform }}
+      buildName: DefaultScene
+    strategy:
+      fail-fast: false
+      matrix:
+        unityVersion:
+          - 2020.1.10f1
+        platform:
+          - windows
+    steps:
+      - name: Create Test Project Folder
+        run: mkdir -p ${{ env.projectPath }}/Packages/EntityTween
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: ${{ env.projectPath }}/Packages/EntityTween
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.projectPath }}/Library
+          key: Library-${{ matrix.unityVersion }}-${{ matrix.platform }}
+          restore-keys: |
+            Library-${{ matrix.unityVersion }}-
+            Library-
+      - name: Build
+        run: ${{ env.unityCommand }} -username "${{ secrets.UNITY_EMAIL }}" -password "${{ secrets.UNITY_PASSWORD }}" -serial "${{ secrets.UNITY_SERIAL }}" -createProject '${{ env.projectPath }}' -executeMethod Timespawn.EntityTween.Editor.CI.BuildUtils.BuildDefaultScene ${{ env.buildPath }}/${{ env.buildName }} ${{ matrix.platform }}
+      - name: Return license
+        if: ${{ always() }}
+        run: ${{ env.unityCommand }} -returnLicense
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.buildPath }}
+          path: ${{ env.projectPath }}/${{ env.buildPath }}
+          
+        
+  

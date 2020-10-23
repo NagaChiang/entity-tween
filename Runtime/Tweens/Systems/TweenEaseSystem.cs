@@ -13,11 +13,11 @@ namespace Timespawn.EntityTween
 
             Entities
                 .WithNone<TweenPause>()
-                .ForEach((ref DynamicBuffer<Tween> tweenBuffer) =>
+                .ForEach((ref DynamicBuffer<TweenState> tweenBuffer) =>
                 {
                     for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        Tween tween = tweenBuffer[i];
+                        TweenState tween = tweenBuffer[i];
                         tween.Time += tween.IsReverting ? -deltaTime : deltaTime;
 
                         float normalizedTime = tween.GetNormalizedTime();

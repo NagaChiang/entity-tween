@@ -12,11 +12,11 @@ namespace Timespawn.EntityTween
         {
             Entities
                 .WithNone<TweenPause>()
-                .ForEach((ref Rotation rotation, in DynamicBuffer<Tween> tweenBuffer, in TweenRotation tweenInfo) =>
+                .ForEach((ref Rotation rotation, in DynamicBuffer<TweenState> tweenBuffer, in TweenRotation tweenInfo) =>
                 {
                     for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        Tween tween = tweenBuffer[i];
+                        TweenState tween = tweenBuffer[i];
                         if (tween.Id == tweenInfo.Id)
                         {
                             rotation.Value = math.slerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);

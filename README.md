@@ -28,7 +28,7 @@ Entity compatible tween library for Unity ECS/DOTS.
 
 ## Features
 
-- Supporting components
+- Supported components
     - `Translation`
     - `Rotation`
     - `NonUniformScale`
@@ -40,7 +40,7 @@ Entity compatible tween library for Unity ECS/DOTS.
     - Smooth start
     - Smooth stop
     - Smooth step
-    - Cross fade
+    - Crossfade
 
 ## Dependency
 
@@ -89,9 +89,11 @@ To update existing Entity Tween package to the latest, remove the dependency on 
 }
 ```
 
+For more information, please visit [Unity documentation](https://docs.unity3d.com/2020.1/Documentation/Manual/upm-git.html).
+
 ## Examples
 
-The main entry point of the library is the `EntityTween` class. All functionality have overloads to support `EntityManager`, `EntityCommandBuffer` and `EntityCommandBuffer.ParallelWriter`.
+The main entry point of the library is the `Tween` class. All functionality have overloads to support `EntityManager`, `EntityCommandBuffer` and `EntityCommandBuffer.ParallelWriter`.
 
 ### Move the entity
 
@@ -102,23 +104,23 @@ float duration = 5.0f;
 bool isPingPong = false;
 int loopCount = 1;
 
-EntityTween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
-EntityTween.Move(commandBuffer, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
-EntityTween.Move(parallelWriter, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
+Tween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
+Tween.Move(commandBuffer, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
+Tween.Move(parallelWriter, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
 ```
 
 ### Stop the entity
 
 ```cs
-EntityTween.Stop(entityManager, entity);
+Tween.Stop(entityManager, entity);
 ```
 
 ### Check if the entity is tweening
 
-Any entity with component `Tween` is tweening; that is, to know if the entity is tweening, check if the entity has any `Tween` component in any way.
+Any entity with component `TweenState` is tweening; that is, to know if the entity is tweening, check if the entity has any `TweenState` component in any way.
 
 ```cs
-if (EntityManager.HasComponent<Tween>(entity))
+if (EntityManager.HasComponent<TweenState>(entity))
 {
     Debug.Log("It's tweening!");
 }
@@ -128,34 +130,38 @@ if (EntityManager.HasComponent<Tween>(entity))
 
 ### Command
 
-When starting a tween by calling `EntityTween` functions (e.g. `EntityTween.Move()`), it creates a tween command component of its kind (e.g. `TweenTranslationCommand`) containing the tweening data on the target entity.
+When starting a tween by calling `Tween`'s functions (e.g. `Tween.Move()`), it creates a tween command component of its kind (e.g. `TweenTranslationCommand`) containing the tweening data on the target entity.
 
 If starting multiple tweens with the same type consequently, the command component will be overridden by the last one, which means only the last tween will be successfully triggered.
 
 ### Generation
 
-`TweenGenerateSystem` is an abstract generic system, which will take the commands of its kind, then append a `Tween` with an unique tween ID to the `DynamicBuffer` of the target entity. Also, it creates another component with the same tween ID, storing the start and end information of the tween.
+`TweenGenerateSystem` is an abstract generic system, which will take the commands of its kind, then append a `TweenState` with an unique tween ID to the `DynamicBuffer` of the target entity. Also, it creates another component with the same tween ID, storing the start and end information of the tween.
 
-Making `Tween` an `IBufferElementData` allows multiple active tweens on the same entity at the same time, while the other part of the tween data, e.g. `TweenTranslation`, is just an `IComponentData`, which ensures that there must be only one tween of the certain type.
+Making `TweenState` an `IBufferElementData` allows multiple active tweens on the same entity at the same time, while the other part of the tween data, e.g. `TweenTranslation`, is just an `IComponentData`, which ensures that there must be only one tween of the certain type.
 
-For example, `TweenTranslationGenerateSystem`, which inherits `TweenGenerateSystem`, will take `TweenTranslationCommand` then create `Tween` and `TweenTranslation` on the target entity.
+For example, `TweenTranslationGenerateSystem`, which inherits `TweenGenerateSystem`, will take `TweenTranslationCommand` then create `TweenState` and `TweenTranslation` on the target entity.
 
 ### Easing
 
-`TweenEaseSystem` iterates all `Tween` components and update the elapsed time of the tween, then calculate the progress by `Ease.CalculatePercentage()` for later use.
+`TweenEaseSystem` iterates all `TweenState` components and update the elapsed time of the tween, then calculate the progress by `Ease.CalculatePercentage()` for later use.
 
 ### Applying
 
 For every type of tweens, there is a system responsible for applying the value to the target component.
 
-For example, `TweenTranslationSystem` takes `Tween` and `TweenTranslation` and interpolate the value depending on the eased percentage, then apply it to `Translation`.
+For example, `TweenTranslationSystem` takes `TweenState` and `TweenTranslation` and interpolate the value depending on the eased percentage, then apply it to `Translation`.
 
 ### Checking State
 
-`TweenStateSystem` iterates all `Tween` components checking if they're about to be looped, ping-ponged or destroyed. When `Tween.LoopCount == 0` after being updated means it should be looped infinitely, while `Tween.LoopCount == 255` means it's pending destroyed by `TweenDestroySystem` later.
+`TweenStateSystem` iterates all `TweenState` components checking if they're about to be looped, ping-ponged or destroyed. When `TweenState.LoopCount == 0` after being updated means it should be looped infinitely, while `TweenState.LoopCount == 255` means it's pending destroyed by `TweenDestroySystem` later.
 
 ### Destroying
 
-`TweenDestroySystem` is also an abstract generic system for each type of tween to implement, which destroys `Tween` marked by `TweenStateSystem` earlier and its corresponding tween data component.
+`TweenDestroySystem` is also an abstract generic system for each type of tween to implement, which destroys `TweenState` marked by `TweenStateSystem` earlier and its corresponding tween data component.
 
-For example, `TweenTranslationDestroySystem` will be responsible for destroying `Tween` and `TweenTranslation`.
+For example, `TweenTranslationDestroySystem` will be responsible for destroying `TweenState` and `TweenTranslation`.
+
+## Donation
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C12EHR2)

@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace Timespawn.EntityTween.Tweens
 {
-    public struct Tween : IBufferElementData, ITweenId
+    public struct TweenState : IBufferElementData, ITweenId
     {
         public const byte LOOP_COUNT_INFINITE = 0;
         private const byte LOOP_COUNT_PENDING_DESTROY = byte.MaxValue;
@@ -19,7 +19,7 @@ namespace Timespawn.EntityTween.Tweens
         public byte LoopCount;
         public bool IsReverting;
 
-        internal Tween(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex) : this()
+        internal TweenState(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex) : this()
         {
             EaseType = easeType;
             EaseExponent = easeExponent;
@@ -30,7 +30,7 @@ namespace Timespawn.EntityTween.Tweens
             Id = GenerateId(elapsedTime, chunkIndex, tweenInfoTypeIndex);
         }
 
-        internal Tween(TweenParams tweenParams, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex)
+        internal TweenState(TweenParams tweenParams, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex)
             : this(tweenParams.EaseType, tweenParams.EaseExponent, tweenParams.Duration, tweenParams.IsPingPong, tweenParams.LoopCount, elapsedTime, chunkIndex, tweenInfoTypeIndex)
         {
         }

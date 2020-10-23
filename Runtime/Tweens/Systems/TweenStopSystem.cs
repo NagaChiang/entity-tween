@@ -14,11 +14,11 @@ namespace Timespawn.EntityTween.Tweens
 
             Entities
                 .WithAll<TweenStopCommand>()
-                .ForEach((int entityInQueryIndex, Entity entity, ref DynamicBuffer<Tween> tweenBuffer) =>
+                .ForEach((int entityInQueryIndex, Entity entity, ref DynamicBuffer<TweenState> tweenBuffer) =>
                 {
                     for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        Tween tween = tweenBuffer[i];
+                        TweenState tween = tweenBuffer[i];
                         tween.SetPendingDestroy();
 
                         tweenBuffer[i] = tween;    

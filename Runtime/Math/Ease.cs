@@ -53,7 +53,7 @@ namespace Timespawn.EntityTween.Math
             return math.lerp(SmoothStart(t, exponent), SmoothStop(t, exponent), t);
         }
 
-        public static float CrossFade(EaseFunction easeA, EaseFunction easeB, float t)
+        public static float Crossfade(EaseFunction easeA, EaseFunction easeB, float t)
         {
             return (easeA(t) * (1 - t)) + (easeB(t) * t);
         }

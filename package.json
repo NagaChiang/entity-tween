@@ -1,6 +1,6 @@
 {
   "name": "com.timespawn.entitytween",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "Entity Tween",
   "description": "Entity compatible tween library for Unity ECS/DOTS.",
   "unity": "2020.1",
@@ -19,5 +19,12 @@
     "DOTS",
     "Entity",
     "Tween"
+  ],
+  "samples": [
+    {
+      "displayName": "Stress Test",
+      "description": "The test demonstrates lots of cubes being translated, rotated and scaled at the same time. Dependant on Hybrid Renderer (com.unity.rendering.hybrid) for rendering.",
+      "path": "Samples~/StressTest"
+    }
   ]
 }

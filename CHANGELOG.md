@@ -11,6 +11,7 @@
 
 - Rename buffer element `Tween` to `TweenState`
 - Rename static class `EntityTween` to `Tween`
+- Replace assertions with if-else checks to be compatible to Burst
 
 ### Fix
 

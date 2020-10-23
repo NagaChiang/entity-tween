@@ -12,11 +12,11 @@ namespace Timespawn.EntityTween
         {
             Entities
                 .WithNone<TweenPause>()
-                .ForEach((ref Translation translation, in DynamicBuffer<Tween> tweenBuffer, in TweenTranslation tweenInfo) =>
+                .ForEach((ref Translation translation, in DynamicBuffer<TweenState> tweenBuffer, in TweenTranslation tweenInfo) =>
                 {
                     for (int i = 0; i < tweenBuffer.Length; i++)
                     {
-                        Tween tween = tweenBuffer[i];
+                        TweenState tween = tweenBuffer[i];
                         if (tween.Id == tweenInfo.Id)
                         {
                             translation.Value = math.lerp(tweenInfo.Start, tweenInfo.End, tween.EasePercentage);

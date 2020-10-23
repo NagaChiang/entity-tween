@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Timespawn.EntityTween.Tweens
 {
-    public static class EntityTween
+    public static class Tween
     {
         public static void Move(
             EntityManager entityManager,
@@ -202,7 +202,7 @@ namespace Timespawn.EntityTween.Tweens
         private static void AssertParams(int easeExponent, int loopCount)
         {
             Debug.Assert(byte.MinValue <= easeExponent && easeExponent <= byte.MaxValue, $"Exponent of ease function should be between {byte.MinValue} - {byte.MaxValue}.");
-            Debug.Assert(byte.MinValue <= loopCount && loopCount <= byte.MaxValue, $"Loop count should be between {byte.MinValue} - {byte.MaxValue - 1}."); // Preserve 255 for Tween.LOOP_COUNT_PENDING_DESTROY
+            Debug.Assert(byte.MinValue <= loopCount && loopCount <= byte.MaxValue, $"Loop count should be between {byte.MinValue} - {byte.MaxValue - 1}."); // Preserve 255 for TweenState.LOOP_COUNT_PENDING_DESTROY
         }
     }
 }

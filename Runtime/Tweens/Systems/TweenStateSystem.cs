@@ -10,13 +10,13 @@ namespace Timespawn.EntityTween.Tweens
         {
             Entities
                 .WithNone<TweenPause>()
-                .ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<Tween> tweenBuffer) =>
+                .ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<TweenState> tweenBuffer) =>
                 {
                     for (int i = tweenBuffer.Length - 1; i >= 0; i--)
                     {
-                        Tween tween = tweenBuffer[i];
+                        TweenState tween = tweenBuffer[i];
 
-                        bool isInfiniteLoop = tween.LoopCount == Tween.LOOP_COUNT_INFINITE;
+                        bool isInfiniteLoop = tween.LoopCount == TweenState.LOOP_COUNT_INFINITE;
                         float normalizedTime = tween.GetNormalizedTime();
                         if (tween.IsReverting && normalizedTime <= 0.0f)
                         {

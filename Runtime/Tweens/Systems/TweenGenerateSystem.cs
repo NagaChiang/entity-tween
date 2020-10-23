@@ -21,7 +21,7 @@ namespace Timespawn.EntityTween.Tweens
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TTweenCommand> TweenCommandType;
             [ReadOnly] public ComponentTypeHandle<TRequired> RequiredType;
-            [ReadOnly] public BufferTypeHandle<Tween> TweenBufferType;
+            [ReadOnly] public BufferTypeHandle<TweenState> TweenBufferType;
 
             public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
@@ -39,7 +39,7 @@ namespace Timespawn.EntityTween.Tweens
 
                     if (!hasTweenBuffer)
                     {
-                        ParallelWriter.AddBuffer<Tween>(chunkIndex, entity);
+                        ParallelWriter.AddBuffer<TweenState>(chunkIndex, entity);
                         break;
                     }
 
@@ -48,7 +48,7 @@ namespace Timespawn.EntityTween.Tweens
                         ParallelWriter.AddComponent<TRequired>(chunkIndex, entity);
                     }
 
-                    Tween tween = new Tween(command.GetTweenParams(), ElapsedTime, chunkIndex, TweenInfoTypeIndex);
+                    TweenState tween = new TweenState(command.GetTweenParams(), ElapsedTime, chunkIndex, TweenInfoTypeIndex);
                     ParallelWriter.AppendToBuffer(chunkIndex, entity, tween);
 
                     TTweenInfo info = new TTweenInfo();
@@ -80,7 +80,7 @@ namespace Timespawn.EntityTween.Tweens
                 EntityType = GetEntityTypeHandle(),
                 TweenCommandType = GetComponentTypeHandle<TTweenCommand>(true),
                 RequiredType = GetComponentTypeHandle<TRequired>(true),
-                TweenBufferType = GetBufferTypeHandle<Tween>(true),
+                TweenBufferType = GetBufferTypeHandle<TweenState>(true),
                 ParallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter(),
             };
 

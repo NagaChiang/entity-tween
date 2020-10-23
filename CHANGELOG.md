@@ -2,10 +2,15 @@
 
 ## [Unreleased]
 
-## Added
+### Added
 
-- CI with GitHub Actions
-- `Editor.BuildUtils` for building the default scene with CI
+- GitHub Actions to build the default scene for Win64
+- `Editor.BuildUtils` for building the default scene with GitHub Actions
+
+### Changed
+
+- Rename buffer element `Tween` to `TweenState`
+- Rename static class `EntityTween` to `Tween`
 
 ### Fix
 

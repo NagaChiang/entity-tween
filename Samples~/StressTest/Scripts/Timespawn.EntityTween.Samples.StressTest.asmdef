@@ -1,0 +1,24 @@
+{
+    "name": "Timespawn.EntityTween.Samples.StressTest",
+    "references": [
+        "Timespawn.EntityTween",
+        "Unity.Entities",
+        "Unity.Entities.Hybrid",
+        "Unity.Mathematics"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.rendering.hybrid",
+            "expression": "",
+            "define": "ENTITYTWEEN_HYBRID_RENDERER"
+        }
+    ],
+    "noEngineReferences": false
+}

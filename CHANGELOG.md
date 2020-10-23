@@ -6,6 +6,7 @@
 
 - GitHub Actions to build the default scene for Win64
 - `Editor.BuildUtils` for building the default scene with GitHub Actions
+- Sample: Stress Test
 
 ### Changed
 

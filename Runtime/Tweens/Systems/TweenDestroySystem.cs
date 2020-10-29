@@ -55,7 +55,7 @@ namespace Timespawn.EntityTween.Tweens
 
         protected override void OnUpdate()
         {
-            EndSimulationEntityCommandBufferSystem endSimECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+            EndSimulationEntityCommandBufferSystem endSimECBSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
 
             DestroyJob job = new DestroyJob
             {

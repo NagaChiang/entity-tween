@@ -71,7 +71,7 @@ namespace Timespawn.EntityTween.Tweens
         protected override void OnUpdate()
         {
             double elapsedTime = Time.ElapsedTime;
-            EndSimulationEntityCommandBufferSystem endSimECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+            EndSimulationEntityCommandBufferSystem endSimECBSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
 
             GenerateJob job = new GenerateJob
             {

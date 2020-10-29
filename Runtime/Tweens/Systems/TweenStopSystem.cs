@@ -9,7 +9,7 @@ namespace Timespawn.EntityTween.Tweens
     {
         protected override void OnUpdate()
         {
-            BeginSimulationEntityCommandBufferSystem beginSimECBSystem = World.DefaultGameObjectInjectionWorld.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
+            BeginSimulationEntityCommandBufferSystem beginSimECBSystem = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
             EntityCommandBuffer.ParallelWriter parallelWriter = beginSimECBSystem.CreateCommandBuffer().AsParallelWriter();
 
             Entities

@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- `Tween` functions overloads taking `TweenParams`
+
+### Fixed
+
+- Systems used `World.DefaultGameObjectInjectionWorld`
+
 ## [0.2.0] - 2020.10.23
 
 ### Added
@@ -16,7 +24,7 @@
 - Rename static class `EntityTween` to `Tween`
 - Replace assertions with if-else checks to be compatible to Burst
 
-### Fix
+### Fixed
 
 - Typo "Crossfade"
 

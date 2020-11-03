@@ -3,6 +3,8 @@ using Timespawn.EntityTween.Math;
 using Unity.Entities;
 using Unity.Mathematics;
 
+[assembly: InternalsVisibleTo("Timespawn.EntityTween.Tests")]
+
 namespace Timespawn.EntityTween.Tweens
 {
     public static class Tween
@@ -155,17 +157,17 @@ namespace Timespawn.EntityTween.Tweens
 
         public static void Scale(EntityManager entityManager, Entity entity, float3 start, float3 end, TweenParams tweenParams)
         {
-            Move(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+            Scale(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
         }
 
         public static void Scale(EntityCommandBuffer commandBuffer, Entity entity, float3 start, float3 end, TweenParams tweenParams)
         {
-            Move(commandBuffer, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+            Scale(commandBuffer, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
         }
 
         public static void Scale(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity, float3 start, float3 end, TweenParams tweenParams)
         {
-            Move(parallelWriter, sortKey, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+            Scale(parallelWriter, sortKey, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
         }
 
         public static void Scale(

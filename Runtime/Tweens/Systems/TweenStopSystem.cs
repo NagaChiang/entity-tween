@@ -9,8 +9,8 @@ namespace Timespawn.EntityTween.Tweens
     {
         protected override void OnUpdate()
         {
-            BeginSimulationEntityCommandBufferSystem beginSimECBSystem = World.GetOrCreateSystem<BeginSimulationEntityCommandBufferSystem>();
-            EntityCommandBuffer.ParallelWriter parallelWriter = beginSimECBSystem.CreateCommandBuffer().AsParallelWriter();
+            EndSimulationEntityCommandBufferSystem endSimECBSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+            EntityCommandBuffer.ParallelWriter parallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter();
 
             Entities
                 .WithAll<TweenStopCommand>()
@@ -32,7 +32,7 @@ namespace Timespawn.EntityTween.Tweens
                     }
                 }).ScheduleParallel();
 
-            beginSimECBSystem.AddJobHandleForProducer(Dependency);
+            endSimECBSystem.AddJobHandleForProducer(Dependency);
         }
     }
 }

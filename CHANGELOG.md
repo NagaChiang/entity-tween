@@ -1,6 +1,29 @@
 # Changelog
 
-## [Unreleased]
+## [0.3.0] - 2020.11.03
+
+### Added
+
+- `Tween` functions overloads taking `TweenParams`
+- `TweenParams` default values in constructor
+- `TweenParams` overrides `ToString()`
+- Unit tests
+    - Ease
+    - Pause
+    - Resume
+    - Stop
+    - Ping-pong
+    - Loop
+    - Generate, apply and destroy
+        - `Translation`
+        - `Rotation`
+        - `NonUniformScale`
+
+### Changed
+
+- `TweenParams` parameters order in constructor
+- `TweenStopSystem` schedules structural changes to `EndSimulationEntityCommandBufferSystem` (was `BeginSimulationEntityCommandBufferSystem`)
+- Systems use `World` (was `World.DefaultGameObjectInjectionWorld`)
 
 ## [0.2.0] - 2020.10.23
 
@@ -16,7 +39,7 @@
 - Rename static class `EntityTween` to `Tween`
 - Replace assertions with if-else checks to be compatible to Burst
 
-### Fix
+### Fixed
 
 - Typo "Crossfade"
 

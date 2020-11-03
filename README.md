@@ -1,5 +1,7 @@
 # Entity Tween
 
+![Unity](https://github.com/NagaChiang/entity-tween/workflows/Unity/badge.svg)
+
 Entity compatible tween library for Unity ECS/DOTS.
 
 ## Demonstration
@@ -34,7 +36,7 @@ Entity compatible tween library for Unity ECS/DOTS.
     - `NonUniformScale`
 - Pause, resume and stop tweens on an entity
 - Multiple types of active tweens on the same entity at the same time
-- Ping pong
+- Ping-pong
 - Loop
 - Ease library (inspired by [Squirrel Eiserloh's talk on GDC 2015](https://www.youtube.com/watch?v=mr5xkf6zSzk))
     - Smooth start
@@ -113,6 +115,14 @@ Tween.Move(parallelWriter, entity, start, end, duration, new EaseDesc(EaseType.S
 
 ```cs
 Tween.Stop(entityManager, entity);
+```
+
+### Loop infinitely
+
+When `loopCount` is 0, it means loop the tween infinitely. It's recommended to use `TweenState.LOOP_COUNT_INFINITE` in case it changes in the future.
+
+```cs
+Tween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, TweenState.LOOP_COUNT_INFINITE);
 ```
 
 ### Check if the entity is tweening

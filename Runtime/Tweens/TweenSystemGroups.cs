@@ -11,7 +11,7 @@ namespace Timespawn.EntityTween.Tweens
     //   - TweenRotationSystem
     //   - TweenScaleSystem
     //   - etc.
-    // - TweenStateSyetem
+    // - TweenStateSystem
     // - TweenResumeSystem
     // - TweenStopSystem
     // - TweenDestroySystemGroup

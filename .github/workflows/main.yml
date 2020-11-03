@@ -1,8 +1,8 @@
-name: Unity CI
+name: Unity
 on: push
 jobs:
-  build:
-    name: Build (${{ matrix.unityVersion }}, ${{ matrix.platform }})
+  test-and-build:
+    name: Test and Build (${{ matrix.unityVersion }}, ${{ matrix.platform }})
     runs-on: ubuntu-latest
     container: gableroux/unity3d:${{ matrix.unityVersion }}-${{ matrix.platform }}
     env:
@@ -18,7 +18,7 @@ jobs:
         platform:
           - windows
     steps:
-      - name: Create Test Project Folder
+      - name: Create test project folder
         run: mkdir -p ${{ env.projectPath }}/Packages/EntityTween
       - name: Checkout
         uses: actions/checkout@v2
@@ -32,13 +32,22 @@ jobs:
           restore-keys: |
             Library-${{ matrix.unityVersion }}-
             Library-
+      - name: Activate and create project
+        run: ${{ env.unityCommand }} -username "${{ secrets.UNITY_EMAIL }}" -password "${{ secrets.UNITY_PASSWORD }}" -serial "${{ secrets.UNITY_SERIAL }}" -createProject '${{ env.projectPath }}'
+      - name: Unit tests
+        run: /opt/Unity/Editor/Unity -batchmode -nographics -logfile /dev/stdout -projectPath '${{ env.projectPath }}' -runTests -testPlatform PlayMode
       - name: Build
-        run: ${{ env.unityCommand }} -username "${{ secrets.UNITY_EMAIL }}" -password "${{ secrets.UNITY_PASSWORD }}" -serial "${{ secrets.UNITY_SERIAL }}" -createProject '${{ env.projectPath }}' -executeMethod Timespawn.EntityTween.Editor.CI.BuildUtils.BuildDefaultScene ${{ env.buildPath }}/${{ env.buildName }} ${{ matrix.platform }}
+        run: ${{ env.unityCommand }} -projectPath '${{ env.projectPath }}' -executeMethod Timespawn.EntityTween.Editor.CI.BuildUtils.BuildDefaultScene ${{ env.buildPath }}/${{ env.buildName }} ${{ matrix.platform }}
       - name: Return license
         if: ${{ always() }}
         run: ${{ env.unityCommand }} -returnLicense
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1
+      - name: Upload unit tests results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: ${{ env.projectPath }}/TestResults*.xml
+      - name: Upload build
+        uses: actions/upload-artifact@v2
         with:
           name: ${{ env.buildPath }}
           path: ${{ env.projectPath }}/${{ env.buildPath }}

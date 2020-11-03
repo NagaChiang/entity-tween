@@ -1,12 +1,29 @@
-﻿using Timespawn.EntityTween.Math;
+﻿using System.Runtime.CompilerServices;
+using Timespawn.EntityTween.Math;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
+
+[assembly: InternalsVisibleTo("Timespawn.EntityTween.Tests")]
 
 namespace Timespawn.EntityTween.Tweens
 {
     public static class Tween
     {
+        public static void Move(EntityManager entityManager, Entity entity, float3 start, float3 end, TweenParams tweenParams)
+        {
+            Move(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
+        public static void Move(EntityCommandBuffer commandBuffer, Entity entity, float3 start, float3 end, TweenParams tweenParams)
+        {
+            Move(commandBuffer, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
+        public static void Move(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity, float3 start, float3 end, TweenParams tweenParams)
+        {
+            Move(parallelWriter, sortKey, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
         public static void Move(
             EntityManager entityManager,
             Entity entity,
@@ -22,7 +39,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             entityManager.AddComponentData(entity, new TweenTranslationCommand(tweenParams, start, end));
         }
 
@@ -41,7 +58,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             commandBuffer.AddComponent(entity, new TweenTranslationCommand(tweenParams, start, end));
         }
 
@@ -61,8 +78,23 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             parallelWriter.AddComponent(sortKey, entity, new TweenTranslationCommand(tweenParams, start, end));
+        }
+
+        public static void Rotate(EntityManager entityManager, Entity entity, quaternion start, quaternion end, TweenParams tweenParams)
+        {
+            Rotate(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
+        public static void Rotate(EntityCommandBuffer commandBuffer, Entity entity, quaternion start, quaternion end, TweenParams tweenParams)
+        {
+            Rotate(commandBuffer, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
+        public static void Rotate(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity, quaternion start, quaternion end, TweenParams tweenParams)
+        {
+            Rotate(parallelWriter, sortKey, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
         }
 
         public static void Rotate(
@@ -80,7 +112,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             entityManager.AddComponentData(entity, new TweenRotationCommand(tweenParams, start, end));
         }
 
@@ -99,7 +131,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             commandBuffer.AddComponent(entity, new TweenRotationCommand(tweenParams, start, end));
         }
 
@@ -119,8 +151,23 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             parallelWriter.AddComponent(sortKey, entity, new TweenRotationCommand(tweenParams, start, end));
+        }
+
+        public static void Scale(EntityManager entityManager, Entity entity, float3 start, float3 end, TweenParams tweenParams)
+        {
+            Scale(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
+        public static void Scale(EntityCommandBuffer commandBuffer, Entity entity, float3 start, float3 end, TweenParams tweenParams)
+        {
+            Scale(commandBuffer, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
+        }
+
+        public static void Scale(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity, float3 start, float3 end, TweenParams tweenParams)
+        {
+            Scale(parallelWriter, sortKey, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount);
         }
 
         public static void Scale(
@@ -138,7 +185,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             entityManager.AddComponentData(entity, new TweenScaleCommand(tweenParams, start, end));
         }
 
@@ -157,7 +204,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             commandBuffer.AddComponent(entity, new TweenScaleCommand(tweenParams, start, end));
         }
 
@@ -177,7 +224,7 @@ namespace Timespawn.EntityTween.Tweens
                 return;
             }
 
-            TweenParams tweenParams = new TweenParams(easeDesc.Type, easeDesc.Exponent, duration, isPingPong, loopCount);
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount);
             parallelWriter.AddComponent(sortKey, entity, new TweenScaleCommand(tweenParams, start, end));
         }
 

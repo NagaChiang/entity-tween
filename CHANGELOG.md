@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.3.0] - 2020.11.03
 
 ### Added
 
@@ -24,9 +24,6 @@
 - `TweenParams` parameters order in constructor
 - `TweenStopSystem` schedules structural changes to `EndSimulationEntityCommandBufferSystem` (was `BeginSimulationEntityCommandBufferSystem`)
 - Systems use `World` (was `World.DefaultGameObjectInjectionWorld`)
-
-### Fixed
-
 
 ## [0.2.0] - 2020.10.23
 

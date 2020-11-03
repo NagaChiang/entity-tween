@@ -1,5 +1,7 @@
 # Entity Tween
 
+![Unity](https://github.com/NagaChiang/entity-tween/workflows/Unity/badge.svg)
+
 Entity compatible tween library for Unity ECS/DOTS.
 
 ## Demonstration

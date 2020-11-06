@@ -9,14 +9,16 @@ namespace Timespawn.EntityTween
         public byte EaseExponent;
         public bool IsPingPong;
         public byte LoopCount;
+        public float StartDelay;
 
-        public TweenParams(float duration, EaseType easeType = EaseType.Linear, int easeExponent = 0, bool isPingPong = false, int loopCount = 1)
+        public TweenParams(float duration, EaseType easeType = EaseType.Linear, int easeExponent = 0, bool isPingPong = false, int loopCount = 1, float startDelay = 0.0f)
         {
             Duration = duration;
             EaseType = easeType;
             EaseExponent = (byte) easeExponent;
             IsPingPong = isPingPong;
             LoopCount = (byte) loopCount;
+            StartDelay = startDelay;
         }
 
         public override string ToString()
@@ -36,6 +38,11 @@ namespace Timespawn.EntityTween
             if (LoopCount != 1)
             {
                 msg += LoopCount == 0 ? ", infinite" : $", {LoopCount} times";
+            }
+
+            if (StartDelay > 0.0f)
+            {
+                msg += $", delayed {StartDelay} secs";
             }
 
             return msg;

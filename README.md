@@ -38,6 +38,7 @@ Entity compatible tween library for Unity ECS/DOTS.
 - Multiple types of active tweens on the same entity at the same time
 - Ping-pong
 - Loop
+- Delayed start
 - Ease library (inspired by [Squirrel Eiserloh's talk on GDC 2015](https://www.youtube.com/watch?v=mr5xkf6zSzk))
     - Smooth start
     - Smooth stop

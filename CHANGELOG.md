@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Delayed start
+- Unit test: `Ease_Delayed`
+
 ## [0.3.0] - 2020.11.03
 
 ### Added

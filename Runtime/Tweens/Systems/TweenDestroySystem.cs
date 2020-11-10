@@ -1,5 +1,6 @@
 ﻿using Unity.Burst;
 using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
 
 namespace Timespawn.EntityTween.Tweens
@@ -14,7 +15,7 @@ namespace Timespawn.EntityTween.Tweens
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TTweenInfo> InfoType;
 
-            [NativeDisableParallelForRestriction] public BufferFromEntity<TweenState> TweenBufferFromEntity;
+            [NativeDisableContainerSafetyRestriction] public BufferFromEntity<TweenState> TweenBufferFromEntity;
 
             public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
@@ -37,7 +38,7 @@ namespace Timespawn.EntityTween.Tweens
                             break;
                         }
                     }
-
+                    
                     if (tweenBuffer.IsEmpty)
                     {
                         ParallelWriter.RemoveComponent<TweenState>(chunkIndex, entity);

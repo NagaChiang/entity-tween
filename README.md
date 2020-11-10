@@ -2,7 +2,7 @@
 
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nagachiang/entity-tween?sort=semver) ![Unity](https://github.com/NagaChiang/entity-tween/workflows/Unity/badge.svg)
 
-Entity compatible tween library for Unity ECS/DOTS.
+Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtime).
 
 ## Demonstration
 
@@ -30,15 +30,17 @@ Entity compatible tween library for Unity ECS/DOTS.
 
 ## Features
 
-- Supported components
-    - `Translation`
-    - `Rotation`
-    - `NonUniformScale`
+- Compatible with Tiny 0.29.0 and above (DOTS Runtime)
+- Tween support
+    - `Translation.Value`
+    - `Rotation.Value`
+    - `NonUniformScale.Value`
+    - `SpriteRenderer.Color` in Tiny
 - Pause, resume and stop tweens on an entity
 - Multiple types of active tweens on the same entity at the same time
 - Ping-pong
 - Loop
-- Delayed start
+- Start delay
 - Ease library (inspired by [Squirrel Eiserloh's talk on GDC 2015](https://www.youtube.com/watch?v=mr5xkf6zSzk))
     - Smooth start
     - Smooth stop

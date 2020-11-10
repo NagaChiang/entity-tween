@@ -15,6 +15,8 @@ namespace Timespawn.EntityTween.Tests.Tweens
 
         protected readonly float3 TestStartFloat3 = new float3(0.0f);
         protected readonly float3 TestEndFloat3 = new float3(1.0f);
+        protected readonly float4 TestStartFloat4 = new float4(0.0f);
+        protected readonly float4 TestEndFloat4 = new float4(1.0f);
         protected readonly quaternion TestStartQuat = quaternion.identity;
         protected readonly quaternion TestEndQuat = quaternion.Euler(90.0f, 0.0f, 0.0f);
 

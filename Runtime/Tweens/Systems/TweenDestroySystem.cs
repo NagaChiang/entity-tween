@@ -73,4 +73,8 @@ namespace Timespawn.EntityTween.Tweens
     internal class TweenTranslationDestroySystem : TweenDestroySystem<TweenTranslation> {}
     internal class TweenRotationDestroySystem : TweenDestroySystem<TweenRotation> {}
     internal class TweenScaleDestroySystem : TweenDestroySystem<TweenScale> {}
+
+#if UNITY_TINY_ALL_0_31_0 || UNITY_2D_ENTITIES
+    internal class TweenTintDestroySystem : TweenDestroySystem<TweenTint> {}
+#endif
 }

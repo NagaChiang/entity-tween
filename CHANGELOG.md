@@ -4,8 +4,12 @@
 
 ### Added
 
-- Delayed start
-- Unit test: `Ease_Delayed`
+- Tween parameter: Start delay
+- Tween support for `SpriteRenderer.Color` in Tiny (`Tween.Tint()`)
+- Support for Tiny 0.29.0 and above
+- Unit tests
+    - `Ease_Delayed`
+    - Generation, application and destruction of `Tween.Tint()`
 
 ## [0.3.0] - 2020.11.03
 

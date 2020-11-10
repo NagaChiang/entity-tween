@@ -51,11 +51,11 @@ namespace Timespawn.EntityTween.Tests.Tweens
         [Test]
         public void Ease_DelayedStart()
         {
-            const float delayedStartTime = 3.0f;
-            const float deltaTime = delayedStartTime / 2.0f;
+            const float startDelay = 3.0f;
+            const float deltaTime = startDelay / 2.0f;
 
             Entity entity = EntityManager.CreateEntity();
-            Tween.Move(EntityManager, entity, TestStartFloat3, TestEndFloat3, TestDuration, delayedStartTime: delayedStartTime);
+            Tween.Move(EntityManager, entity, TestStartFloat3, TestEndFloat3, TestDuration, startDelay: startDelay);
 
             World.Update();
             World.Update();

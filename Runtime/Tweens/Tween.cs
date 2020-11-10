@@ -237,6 +237,86 @@ namespace Timespawn.EntityTween.Tweens
             parallelWriter.AddComponent(sortKey, entity, new TweenScaleCommand(tweenParams, start, end));
         }
 
+#if UNITY_TINY_ALL_0_31_0 || UNITY_2D_ENTITIES
+
+        public static void Tint(EntityManager entityManager, Entity entity, float4 start, float4 end, TweenParams tweenParams)
+        {
+            Tint(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount, tweenParams.StartDelay);
+        }
+
+        public static void Tint(EntityCommandBuffer commandBuffer, Entity entity, float4 start, float4 end, TweenParams tweenParams)
+        {
+            Tint(commandBuffer, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount, tweenParams.StartDelay);
+        }
+
+        public static void Tint(EntityCommandBuffer.ParallelWriter parallelWriter, int sortKey, Entity entity, float4 start, float4 end, TweenParams tweenParams)
+        {
+            Tint(parallelWriter, sortKey, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount, tweenParams.StartDelay);
+        }
+
+        public static void Tint(
+            EntityManager entityManager,
+            Entity entity,
+            float4 start, 
+            float4 end, 
+            float duration,
+            EaseDesc easeDesc = default,
+            bool isPingPong = false, 
+            int loopCount = 1,
+            float startDelay = 0.0f)
+        {
+            if (!CheckParams(easeDesc.Exponent, loopCount))
+            {
+                return;
+            }
+
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount, startDelay);
+            entityManager.AddComponentData(entity, new TweenTintCommand(tweenParams, start, end));
+        }
+
+        public static void Tint(
+            EntityCommandBuffer commandBuffer,
+            Entity entity,
+            float4 start, 
+            float4 end, 
+            float duration,
+            EaseDesc easeDesc = default,
+            bool isPingPong = false, 
+            int loopCount = 1,
+            float startDelay = 0.0f)
+        {
+            if (!CheckParams(easeDesc.Exponent, loopCount))
+            {
+                return;
+            }
+
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount, startDelay);
+            commandBuffer.AddComponent(entity, new TweenTintCommand(tweenParams, start, end));
+        }
+
+        public static void Tint(
+            EntityCommandBuffer.ParallelWriter parallelWriter,
+            int sortKey,
+            Entity entity,
+            float4 start, 
+            float4 end, 
+            float duration,
+            EaseDesc easeDesc = default,
+            bool isPingPong = false, 
+            int loopCount = 1,
+            float startDelay = 0.0f)
+        {
+            if (!CheckParams(easeDesc.Exponent, loopCount))
+            {
+                return;
+            }
+
+            TweenParams tweenParams = new TweenParams(duration, easeDesc.Type, easeDesc.Exponent, isPingPong, loopCount, startDelay);
+            parallelWriter.AddComponent(sortKey, entity, new TweenTintCommand(tweenParams, start, end));
+        }
+
+#endif
+
         public static void Pause(EntityManager entityManager, Entity entity)
         {
             entityManager.AddComponent<TweenPause>(entity);

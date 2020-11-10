@@ -12,6 +12,11 @@ namespace Timespawn.EntityTween.Math
 
     public struct EaseDesc
     {
+        public static readonly EaseDesc Linear = new EaseDesc(EaseType.Linear, 0);
+        public static readonly EaseDesc SmoothStart = new EaseDesc(EaseType.SmoothStart, 2);
+        public static readonly EaseDesc SmoothStop = new EaseDesc(EaseType.SmoothStop, 2);
+        public static readonly EaseDesc SmoothStep = new EaseDesc(EaseType.SmoothStep, 2);
+
         public EaseType Type;
         public int Exponent;
 

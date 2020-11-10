@@ -10,6 +10,15 @@
 - Unit tests
     - `Ease_Delayed`
     - Generation, application and destruction of `Tween.Tint()`
+- `EaseDesc` shortcuts (with exponent = 2)
+    - `EaseDesc.Linear`
+    - `EaseDesc.SmoothStart`
+    - `EaseDesc.SmoothStop`
+    - `EaseDesc.SmoothStep`
+
+### Changed
+
+- Set WriteGroup for `Translation`, `Rotation` and `Scale`
 
 ## [0.3.0] - 2020.11.03
 

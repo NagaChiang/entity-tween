@@ -54,6 +54,10 @@ Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtim
   - Burst 1.3.6
   - Mathematics 1.2.1
 
+### Optional
+
+- Project Tiny Full 0.29.0
+
 ## Installation
 
 Entity Tween is a Unity package. You can [install it from the git URL](https://docs.unity3d.com/2020.1/Documentation/Manual/upm-ui-giturl.html) in Unity package manager.
@@ -109,9 +113,9 @@ float duration = 5.0f;
 bool isPingPong = false;
 int loopCount = 1;
 
-Tween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
-Tween.Move(commandBuffer, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
-Tween.Move(parallelWriter, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
+Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
+Tween.Move(commandBuffer, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
+Tween.Move(parallelWriter, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
 ```
 
 ### Stop the entity
@@ -125,7 +129,7 @@ Tween.Stop(entityManager, entity);
 When `loopCount` is 0, it means loop the tween infinitely. It's recommended to use `TweenState.LOOP_COUNT_INFINITE` in case it changes in the future.
 
 ```cs
-Tween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, TweenState.LOOP_COUNT_INFINITE);
+Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, TweenState.LOOP_COUNT_INFINITE);
 ```
 
 ### Check if the entity is tweening

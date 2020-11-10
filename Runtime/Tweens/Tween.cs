@@ -9,6 +9,8 @@ namespace Timespawn.EntityTween.Tweens
 {
     public static class Tween
     {
+        public const byte Infinite = TweenState.LOOP_COUNT_INFINITE;
+
         public static void Move(EntityManager entityManager, Entity entity, float3 start, float3 end, TweenParams tweenParams)
         {
             Move(entityManager, entity, start, end, tweenParams.Duration, new EaseDesc(tweenParams.EaseType, tweenParams.EaseExponent), tweenParams.IsPingPong, tweenParams.LoopCount, tweenParams.StartDelay);

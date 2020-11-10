@@ -19,6 +19,7 @@
 ### Changed
 
 - Set WriteGroup for `Translation`, `Rotation` and `Scale`
+- Replace `TweenState.LOOP_COUNT_INFINITE` with `Tween.Infinite`
 
 ## [0.3.0] - 2020.11.03
 

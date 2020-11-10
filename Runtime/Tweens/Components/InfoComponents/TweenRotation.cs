@@ -1,8 +1,10 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Transforms;
 
 namespace Timespawn.EntityTween.Tweens
 {
+    [WriteGroup(typeof(Rotation))]
     public struct TweenRotation : IComponentData, ITweenId, ITweenInfo<quaternion>
     {
         public int Id;

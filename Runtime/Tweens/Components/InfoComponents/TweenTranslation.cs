@@ -1,8 +1,10 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Transforms;
 
 namespace Timespawn.EntityTween.Tweens
 {
+    [WriteGroup(typeof(Translation))]
     public struct TweenTranslation : IComponentData, ITweenId, ITweenInfo<float3>
     {
         public int Id;

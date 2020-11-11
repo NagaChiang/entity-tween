@@ -126,10 +126,10 @@ Tween.Stop(entityManager, entity);
 
 ### Loop infinitely
 
-When `loopCount` is 0, it means loop the tween infinitely. It's recommended to use `TweenState.LOOP_COUNT_INFINITE` in case it changes in the future.
+When `loopCount` is 0, it means loop the tween infinitely. It's recommended to use `Tween.Infinite` in case it changes in the future.
 
 ```cs
-Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, TweenState.LOOP_COUNT_INFINITE);
+Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, Tween.Infinite);
 ```
 
 ### Check if the entity is tweening

@@ -49,6 +49,32 @@ namespace Timespawn.EntityTween.Tests.Tweens
         }
 
         [Test]
+        public void Ease_DelayedStart()
+        {
+            const float startDelay = 3.0f;
+            const float deltaTime = startDelay / 2.0f;
+
+            Entity entity = EntityManager.CreateEntity();
+            Tween.Move(EntityManager, entity, TestStartFloat3, TestEndFloat3, TestDuration, startDelay: startDelay);
+
+            World.Update();
+            World.Update();
+            OverrideNextDeltaTime(deltaTime);
+            World.Update();
+
+            TweenState tween = GetSingletonTweenState(entity);
+            Assert.AreEqual(-deltaTime, tween.Time);
+            Assert.AreEqual(0.0f, tween.EasePercentage);
+
+            OverrideNextDeltaTime(deltaTime);
+            World.Update();
+
+            tween = GetSingletonTweenState(entity);
+            Assert.AreEqual(0.0f, tween.Time);
+            Assert.AreEqual(0.0f, tween.EasePercentage);
+        }
+
+        [Test]
         public void AtEnd()
         {
             Entity entity = EntityManager.CreateEntity();

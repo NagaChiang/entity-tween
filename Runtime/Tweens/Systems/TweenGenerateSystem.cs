@@ -4,6 +4,14 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
+#if UNITY_TINY_ALL_0_31_0
+using Unity.Tiny;
+#endif
+
+#if UNITY_2D_ENTITIES
+using Unity.U2D.Entities;
+#endif
+
 namespace Timespawn.EntityTween.Tweens
 {
     [UpdateInGroup(typeof(TweenGenerateSystemGroup))]
@@ -92,4 +100,8 @@ namespace Timespawn.EntityTween.Tweens
     internal class TweenTranslationGenerateSystem : TweenGenerateSystem<TweenTranslationCommand, TweenTranslation, Translation, float3> {}
     internal class TweenRotationGenerateSystem : TweenGenerateSystem<TweenRotationCommand, TweenRotation, Rotation, quaternion> {}
     internal class TweenScaleGenerateSystem : TweenGenerateSystem<TweenScaleCommand, TweenScale, NonUniformScale, float3> {}
+
+#if UNITY_TINY_ALL_0_31_0 || UNITY_2D_ENTITIES
+    internal class TweenTintGenerateSystem : TweenGenerateSystem<TweenTintCommand, TweenTint, SpriteRenderer, float4> {}
+#endif
 }

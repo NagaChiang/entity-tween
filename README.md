@@ -2,7 +2,7 @@
 
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/nagachiang/entity-tween?sort=semver) ![Unity](https://github.com/NagaChiang/entity-tween/workflows/Unity/badge.svg)
 
-Entity compatible tween library for Unity ECS/DOTS.
+Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtime).
 
 ## Demonstration
 
@@ -30,14 +30,17 @@ Entity compatible tween library for Unity ECS/DOTS.
 
 ## Features
 
-- Supported components
-    - `Translation`
-    - `Rotation`
-    - `NonUniformScale`
+- Compatible with Tiny 0.29.0 and above (DOTS Runtime)
+- Tween support
+    - `Translation.Value`
+    - `Rotation.Value`
+    - `NonUniformScale.Value`
+    - `SpriteRenderer.Color` in Tiny
 - Pause, resume and stop tweens on an entity
 - Multiple types of active tweens on the same entity at the same time
 - Ping-pong
 - Loop
+- Start delay
 - Ease library (inspired by [Squirrel Eiserloh's talk on GDC 2015](https://www.youtube.com/watch?v=mr5xkf6zSzk))
     - Smooth start
     - Smooth stop
@@ -47,9 +50,13 @@ Entity compatible tween library for Unity ECS/DOTS.
 ## Dependency
 
 - Unity 2020.1
-  - Entities 0.14.0-preview.18
-  - Burst 1.3.6
-  - Mathematics 1.2.1
+- Entities 0.14.0-preview.18
+- Burst 1.3.6
+- Mathematics 1.2.1
+
+### Optional
+
+- Project Tiny Full 0.29.0
 
 ## Installation
 
@@ -106,9 +113,9 @@ float duration = 5.0f;
 bool isPingPong = false;
 int loopCount = 1;
 
-Tween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
-Tween.Move(commandBuffer, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
-Tween.Move(parallelWriter, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, loopCount);
+Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
+Tween.Move(commandBuffer, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
+Tween.Move(parallelWriter, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
 ```
 
 ### Stop the entity
@@ -119,10 +126,10 @@ Tween.Stop(entityManager, entity);
 
 ### Loop infinitely
 
-When `loopCount` is 0, it means loop the tween infinitely. It's recommended to use `TweenState.LOOP_COUNT_INFINITE` in case it changes in the future.
+When `loopCount` is 0, it means loop the tween infinitely. It's recommended to use `Tween.Infinite` in case it changes in the future.
 
 ```cs
-Tween.Move(entityManager, entity, start, end, duration, new EaseDesc(EaseType.SmoothStep, 2), isPingPong, TweenState.LOOP_COUNT_INFINITE);
+Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, Tween.Infinite);
 ```
 
 ### Check if the entity is tweening

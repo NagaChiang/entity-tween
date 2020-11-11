@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.4.0] - 2020.11.11
+
+### Added
+
+- Tween parameter: Start delay
+- Tween support for `SpriteRenderer.Color` in Tiny (`Tween.Tint()`)
+- Support for Tiny 0.29.0 and above
+- Unit tests
+    - `Ease_Delayed`
+    - Generation, application and destruction of `Tween.Tint()`
+- `EaseDesc` shortcuts (with exponent = 2)
+    - `EaseDesc.Linear`
+    - `EaseDesc.SmoothStart`
+    - `EaseDesc.SmoothStop`
+    - `EaseDesc.SmoothStep`
+
+### Changed
+
+- Set WriteGroup for `Translation`, `Rotation` and `Scale`
+- Replace `TweenState.LOOP_COUNT_INFINITE` with `Tween.Infinite`
+
+### Fixed
+
+- Parallel writing with `[NativeDisableContainerSafetyRestriction]` in `TweenDestroySystem`
+
 ## [0.3.0] - 2020.11.03
 
 ### Added

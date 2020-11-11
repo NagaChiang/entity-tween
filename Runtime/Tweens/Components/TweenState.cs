@@ -6,7 +6,7 @@ namespace Timespawn.EntityTween.Tweens
 {
     public struct TweenState : IBufferElementData, ITweenId
     {
-        public const byte LOOP_COUNT_INFINITE = 0;
+        internal const byte LOOP_COUNT_INFINITE = 0;
         private const byte LOOP_COUNT_PENDING_DESTROY = byte.MaxValue;
 
         public int Id;
@@ -19,7 +19,7 @@ namespace Timespawn.EntityTween.Tweens
         public byte LoopCount;
         public bool IsReverting;
 
-        internal TweenState(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex) : this()
+        internal TweenState(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, float delayedStartTime, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex) : this()
         {
             EaseType = easeType;
             EaseExponent = easeExponent;
@@ -27,11 +27,12 @@ namespace Timespawn.EntityTween.Tweens
             IsPingPong = isPingPong;
             LoopCount = loopCount;
 
+            Time = -math.max(delayedStartTime, 0.0f);
             Id = GenerateId(elapsedTime, chunkIndex, tweenInfoTypeIndex);
         }
 
         internal TweenState(TweenParams tweenParams, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex)
-            : this(tweenParams.EaseType, tweenParams.EaseExponent, tweenParams.Duration, tweenParams.IsPingPong, tweenParams.LoopCount, elapsedTime, chunkIndex, tweenInfoTypeIndex)
+            : this(tweenParams.EaseType, tweenParams.EaseExponent, tweenParams.Duration, tweenParams.IsPingPong, tweenParams.LoopCount, tweenParams.StartDelay, elapsedTime, chunkIndex, tweenInfoTypeIndex)
         {
         }
 

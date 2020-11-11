@@ -1,17 +1,16 @@
-﻿using Unity.Entities;
+﻿#if UNITY_TINY_ALL_0_31_0 || UNITY_2D_ENTITIES
+using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Transforms;
 
 namespace Timespawn.EntityTween.Tweens
 {
-    [WriteGroup(typeof(Rotation))]
-    public struct TweenRotation : IComponentData, ITweenId, ITweenInfo<quaternion>
+    public struct TweenTint : IComponentData, ITweenId, ITweenInfo<float4>
     {
         public int Id;
-        public quaternion Start;
-        public quaternion End;
+        public float4 Start;
+        public float4 End;
 
-        public TweenRotation(int id, quaternion start, quaternion end)
+        public TweenTint(int id, float4 start, float4 end)
         {
             Id = id;
             Start = start;
@@ -28,20 +27,21 @@ namespace Timespawn.EntityTween.Tweens
             return Id;
         }
 
-        public void SetTweenInfo(quaternion start, quaternion end)
+        public void SetTweenInfo(float4 start, float4 end)
         {
             Start = start;
             End = end;
         }
 
-        public quaternion GetTweenStart()
+        public float4 GetTweenStart()
         {
             return Start;
         }
 
-        public quaternion GetTweenEnd()
+        public float4 GetTweenEnd()
         {
             return End;
         }
     }
-}
+} 
+#endif

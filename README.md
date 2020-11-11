@@ -50,9 +50,9 @@ Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtim
 ## Dependency
 
 - Unity 2020.1
-  - Entities 0.14.0-preview.18
-  - Burst 1.3.6
-  - Mathematics 1.2.1
+- Entities 0.14.0-preview.18
+- Burst 1.3.6
+- Mathematics 1.2.1
 
 ### Optional
 

@@ -19,7 +19,16 @@ namespace Timespawn.EntityTween.Tweens
         public byte LoopCount;
         public bool IsReverting;
 
-        internal TweenState(EaseType easeType, byte easeExponent, float duration, bool isPingPong, byte loopCount, float delayedStartTime, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex) : this()
+        internal TweenState(
+            in EaseType easeType, 
+            in byte easeExponent, 
+            in float duration, 
+            in bool isPingPong, 
+            in byte loopCount, 
+            in float delayedStartTime, 
+            in double elapsedTime, 
+            in int chunkIndex, 
+            in int tweenInfoTypeIndex) : this()
         {
             EaseType = easeType;
             EaseExponent = easeExponent;
@@ -31,7 +40,7 @@ namespace Timespawn.EntityTween.Tweens
             Id = GenerateId(elapsedTime, chunkIndex, tweenInfoTypeIndex);
         }
 
-        internal TweenState(TweenParams tweenParams, double elapsedTime, int chunkIndex, int tweenInfoTypeIndex)
+        internal TweenState(in TweenParams tweenParams, in double elapsedTime, in int chunkIndex, in int tweenInfoTypeIndex)
             : this(tweenParams.EaseType, tweenParams.EaseExponent, tweenParams.Duration, tweenParams.IsPingPong, tweenParams.LoopCount, tweenParams.StartDelay, elapsedTime, chunkIndex, tweenInfoTypeIndex)
         {
         }
@@ -47,7 +56,7 @@ namespace Timespawn.EntityTween.Tweens
             return math.clamp(Time / oneWayDuration, 0.0f, 1.0f);
         }
 
-        public void SetTweenId(int id)
+        public void SetTweenId(in int id)
         {
             Id = id;
         }
@@ -67,7 +76,7 @@ namespace Timespawn.EntityTween.Tweens
             LoopCount = LOOP_COUNT_PENDING_DESTROY;
         }
 
-        private int GenerateId(double elapsedTime, int entityInQueryIndex, int tweenInfoTypeIndex)
+        private int GenerateId(in double elapsedTime, in int entityInQueryIndex, in int tweenInfoTypeIndex)
         {
             unchecked
             {

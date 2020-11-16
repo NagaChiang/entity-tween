@@ -9,20 +9,20 @@ namespace Timespawn.EntityTween.Tweens
         public float3 Start;
         public float3 End;
 
-        public TweenScaleCommand(TweenParams tweenParams, float3 start, float3 end)
+        public TweenScaleCommand(in TweenParams tweenParams, in float3 start, in float3 end)
         {
             TweenParams = tweenParams;
             Start = start;
             End = end;
         }
 
-        public void SetTweenInfo(float3 start, float3 end)
+        public void SetTweenInfo(in float3 start, in float3 end)
         {
             Start = start;
             End = end;
         }
 
-        public void SetTweenParams(TweenParams tweenParams)
+        public void SetTweenParams(in TweenParams tweenParams)
         {
             TweenParams = tweenParams;
         }

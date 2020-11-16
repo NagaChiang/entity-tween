@@ -2,7 +2,7 @@
 {
     internal interface ITweenInfo<T>
     {
-        void SetTweenInfo(T start, T end);
+        void SetTweenInfo(in T start, in T end);
         T GetTweenStart();
         T GetTweenEnd();
     }

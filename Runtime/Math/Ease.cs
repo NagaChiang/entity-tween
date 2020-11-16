@@ -20,7 +20,7 @@ namespace Timespawn.EntityTween.Math
         public EaseType Type;
         public int Exponent;
 
-        public EaseDesc(EaseType type, int exponent)
+        public EaseDesc(in EaseType type, in int exponent)
         {
             Type = type;
             Exponent = exponent;
@@ -29,9 +29,9 @@ namespace Timespawn.EntityTween.Math
 
     public static class Ease
     {
-        public delegate float EaseFunction(float t);
+        public delegate float EaseFunction(in float t);
 
-        public static float SmoothStart(float t, int exponent)
+        public static float SmoothStart(in float t, in int exponent)
         {
             float product = 1;
             for (int n = 0; n < exponent; n++)
@@ -42,7 +42,7 @@ namespace Timespawn.EntityTween.Math
             return product;
         }
 
-        public static float SmoothStop(float t, int exponent)
+        public static float SmoothStop(in float t, in int exponent)
         {
             float product = 1;
             for (int n = 0; n < exponent; n++)
@@ -53,17 +53,17 @@ namespace Timespawn.EntityTween.Math
             return 1 - product;
         }
 
-        public static float SmoothStep(float t, int exponent)
+        public static float SmoothStep(in float t, in int exponent)
         {
             return math.lerp(SmoothStart(t, exponent), SmoothStop(t, exponent), t);
         }
 
-        public static float Crossfade(EaseFunction easeA, EaseFunction easeB, float t)
+        public static float Crossfade(in EaseFunction easeA, in EaseFunction easeB, in float t)
         {
             return (easeA(t) * (1 - t)) + (easeB(t) * t);
         }
 
-        public static float CalculatePercentage(float t, EaseType type, int exponent)
+        public static float CalculatePercentage(in float t, in EaseType type, in int exponent)
         {
             switch (type)
             {

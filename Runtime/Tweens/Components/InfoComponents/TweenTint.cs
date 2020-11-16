@@ -10,14 +10,14 @@ namespace Timespawn.EntityTween.Tweens
         public float4 Start;
         public float4 End;
 
-        public TweenTint(int id, float4 start, float4 end)
+        public TweenTint(in int id, in float4 start, in float4 end)
         {
             Id = id;
             Start = start;
             End = end;
         }
 
-        public void SetTweenId(int id)
+        public void SetTweenId(in int id)
         {
             Id = id;
         }
@@ -27,7 +27,7 @@ namespace Timespawn.EntityTween.Tweens
             return Id;
         }
 
-        public void SetTweenInfo(float4 start, float4 end)
+        public void SetTweenInfo(in float4 start, in float4 end)
         {
             Start = start;
             End = end;

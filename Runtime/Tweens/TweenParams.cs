@@ -11,7 +11,13 @@ namespace Timespawn.EntityTween
         public byte LoopCount;
         public float StartDelay;
 
-        public TweenParams(float duration, EaseType easeType = EaseType.Linear, int easeExponent = 0, bool isPingPong = false, int loopCount = 1, float startDelay = 0.0f)
+        public TweenParams(
+            in float duration, 
+            in EaseType easeType = EaseType.Linear, 
+            in int easeExponent = 0,
+            in bool isPingPong = false, 
+            in int loopCount = 1, 
+            in float startDelay = 0.0f)
         {
             Duration = duration;
             EaseType = easeType;

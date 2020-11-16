@@ -9,20 +9,20 @@ namespace Timespawn.EntityTween.Tweens
         public quaternion Start;
         public quaternion End;
 
-        public TweenRotationCommand(TweenParams tweenParams, quaternion start, quaternion end)
+        public TweenRotationCommand(in TweenParams tweenParams, in quaternion start, in quaternion end)
         {
             TweenParams = tweenParams;
             Start = start;
             End = end;
         }
 
-        public void SetTweenInfo(quaternion start, quaternion end)
+        public void SetTweenInfo(in quaternion start, in quaternion end)
         {
             Start = start;
             End = end;
         }
 
-        public void SetTweenParams(TweenParams tweenParams)
+        public void SetTweenParams(in TweenParams tweenParams)
         {
             TweenParams = tweenParams;
         }

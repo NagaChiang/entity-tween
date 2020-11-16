@@ -11,14 +11,14 @@ namespace Timespawn.EntityTween.Tweens
         public quaternion Start;
         public quaternion End;
 
-        public TweenRotation(int id, quaternion start, quaternion end)
+        public TweenRotation(in int id, in quaternion start, in quaternion end)
         {
             Id = id;
             Start = start;
             End = end;
         }
 
-        public void SetTweenId(int id)
+        public void SetTweenId(in int id)
         {
             Id = id;
         }
@@ -28,7 +28,7 @@ namespace Timespawn.EntityTween.Tweens
             return Id;
         }
 
-        public void SetTweenInfo(quaternion start, quaternion end)
+        public void SetTweenInfo(in quaternion start, in quaternion end)
         {
             Start = start;
             End = end;

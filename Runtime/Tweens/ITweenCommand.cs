@@ -2,7 +2,7 @@
 {
     internal interface ITweenParams
     {
-        void SetTweenParams(TweenParams tweenParams);
+        void SetTweenParams(in TweenParams tweenParams);
         TweenParams GetTweenParams();
     }
 }

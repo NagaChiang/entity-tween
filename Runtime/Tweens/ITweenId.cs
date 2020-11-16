@@ -2,7 +2,7 @@
 {
     internal interface ITweenId
     {
-        void SetTweenId(int id);
+        void SetTweenId(in int id);
         int GetTweenId();
     }
 }

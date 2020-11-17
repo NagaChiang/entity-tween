@@ -1,8 +1,6 @@
 ﻿#if UNITY_TINY_ALL_0_31_0
 using Unity.Tiny;
-#endif
-
-#if UNITY_2D_ENTITIES
+#elif UNITY_2D_ENTITIES
 using Unity.U2D.Entities;
 #endif
 

@@ -6,6 +6,10 @@
 
 - Add `in` modifiers
 
+### Fixed
+
+- Fix an ambiguous reference for `SpriteRenderer` when Tiny 0.31.0 and 2D Entities both installed
+
 ## [0.4.0] - 2020.11.11
 
 ### Added

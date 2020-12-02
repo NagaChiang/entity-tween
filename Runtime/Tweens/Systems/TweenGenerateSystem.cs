@@ -57,7 +57,7 @@ namespace Timespawn.EntityTween.Tweens
                     TweenState tween = new TweenState(command.GetTweenParams(), ElapsedTime, chunkIndex, TweenInfoTypeIndex);
                     ParallelWriter.AppendToBuffer(chunkIndex, entity, tween);
 
-                    TTweenInfo info = new TTweenInfo();
+                    TTweenInfo info = default;
                     info.SetTweenId(tween.Id);
                     info.SetTweenInfo(command.GetTweenStart(), command.GetTweenEnd());
                     ParallelWriter.AddComponent(chunkIndex, entity, info);

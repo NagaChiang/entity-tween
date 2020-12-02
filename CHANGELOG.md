@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Fix an exception in Tiny builds when `new TTweenInfo()` in `TweenGenerateSystem` invokes `Activator.CreateInstance()`
+
 ## [0.4.1] - 2020.11.17
 
 ### Changed

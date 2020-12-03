@@ -15,7 +15,7 @@ namespace Timespawn.EntityTween.Tweens
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TTweenInfo> InfoType;
 
-            [NativeDisableContainerSafetyRestriction] public BufferFromEntity<TweenState> TweenBufferFromEntity;
+            [NativeDisableContainerSafetyRestriction] public BufferTypeHandle<TweenState> TweenBufferType;
 
             public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
@@ -23,11 +23,11 @@ namespace Timespawn.EntityTween.Tweens
             {
                 NativeArray<Entity> entities = chunk.GetNativeArray(EntityType);
                 NativeArray<TTweenInfo> infos = chunk.GetNativeArray(InfoType);
+                BufferAccessor<TweenState> tweenBuffers = chunk.GetBufferAccessor(TweenBufferType);
                 for (int i = 0; i < entities.Length; i++)
                 {
                     Entity entity = entities[i];
-                    
-                    DynamicBuffer<TweenState> tweenBuffer = TweenBufferFromEntity[entity];
+                    DynamicBuffer<TweenState> tweenBuffer = tweenBuffers[i];
                     for (int j = 0; j < tweenBuffer.Length; j++)
                     {
                         TweenState tween = tweenBuffer[j];
@@ -51,7 +51,7 @@ namespace Timespawn.EntityTween.Tweens
 
         protected override void OnCreate()
         {
-            TweenInfoQuery = GetEntityQuery(ComponentType.ReadOnly<TTweenInfo>());
+            TweenInfoQuery = GetEntityQuery(ComponentType.ReadOnly<TTweenInfo>(), ComponentType.ReadOnly<TweenState>());
         }
 
         protected override void OnUpdate()
@@ -62,7 +62,7 @@ namespace Timespawn.EntityTween.Tweens
             {
                 EntityType = GetEntityTypeHandle(),
                 InfoType = GetComponentTypeHandle<TTweenInfo>(true),
-                TweenBufferFromEntity = GetBufferFromEntity<TweenState>(),
+                TweenBufferType = GetBufferTypeHandle<TweenState>(),
                 ParallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter(),
             };
 

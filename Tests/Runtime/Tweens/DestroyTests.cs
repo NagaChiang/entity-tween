@@ -61,6 +61,7 @@ namespace Timespawn.EntityTween.Tests.Tweens
             SetSingletonTweenState(entity, tween);
 
             World.Update();
+            World.Update();
 
             Assert.IsFalse(EntityManager.HasComponent<TweenState>(entity));
             Assert.IsFalse(EntityManager.HasComponent<TTweenInfo>(entity));

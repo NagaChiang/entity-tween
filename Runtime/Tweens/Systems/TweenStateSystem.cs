@@ -8,7 +8,13 @@ namespace Timespawn.EntityTween.Tweens
     {
         protected override void OnUpdate()
         {
+            BufferFromEntity<TweenDestroyCommand> destroyBufferFromEntity = GetBufferFromEntity<TweenDestroyCommand>(true);
+
+            EndSimulationEntityCommandBufferSystem endSimECBSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+            EntityCommandBuffer.ParallelWriter parallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter();
+
             Entities
+                .WithReadOnly(destroyBufferFromEntity)
                 .WithNone<TweenPause>()
                 .ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<TweenState> tweenBuffer) =>
                 {
@@ -48,12 +54,19 @@ namespace Timespawn.EntityTween.Tweens
 
                         if (!isInfiniteLoop && tween.LoopCount == 0)
                         {
-                            tween.SetPendingDestroy();
+                            if (!destroyBufferFromEntity.HasComponent(entity))
+                            {
+                                parallelWriter.AddBuffer<TweenDestroyCommand>(entityInQueryIndex, entity);
+                            }
+
+                            parallelWriter.AppendToBuffer(entityInQueryIndex, entity, new TweenDestroyCommand(tween.Id));
                         }
 
                         tweenBuffer[i] = tween;
                     }
                 }).ScheduleParallel();
+
+            endSimECBSystem.AddJobHandleForProducer(Dependency);
         }
     }
 }

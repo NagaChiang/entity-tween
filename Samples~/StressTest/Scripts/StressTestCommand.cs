@@ -8,7 +8,7 @@ namespace Timespawn.EntityTween.Samples.StressTest
     public struct StressTestCommand : IComponentData
     {
         public Entity Prefab;
-        public ushort Count;
+        public uint Count;
 
         [Header("Move")]
         public float MoveDuration;

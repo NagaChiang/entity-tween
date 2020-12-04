@@ -84,6 +84,7 @@ namespace Timespawn.EntityTween.Tests.Tweens
             World.Update();
             OverrideNextDeltaTime(TestDuration);
             World.Update();
+            World.Update();
 
             Assert.IsFalse(EntityManager.HasComponent<TweenState>(entity));
         }
@@ -170,6 +171,7 @@ namespace Timespawn.EntityTween.Tests.Tweens
             tween.IsReverting = true;
             SetSingletonTweenState(entity, tween);
 
+            World.Update();
             World.Update();
 
             Assert.IsFalse(EntityManager.HasComponent<TweenState>(entity));
@@ -271,6 +273,9 @@ namespace Timespawn.EntityTween.Tests.Tweens
             World.Update();
 
             Assert.IsFalse(EntityManager.HasComponent<TweenStopCommand>(entity));
+
+            World.Update();
+
             Assert.IsFalse(EntityManager.HasComponent<TweenState>(entity));
         }
 
@@ -290,6 +295,9 @@ namespace Timespawn.EntityTween.Tests.Tweens
 
             Assert.IsFalse(EntityManager.HasComponent<TweenStopCommand>(entity));
             Assert.IsFalse(EntityManager.HasComponent<TweenPause>(entity));
+
+            World.Update();
+
             Assert.IsFalse(EntityManager.HasComponent<TweenState>(entity));
         }
 
@@ -311,6 +319,9 @@ namespace Timespawn.EntityTween.Tests.Tweens
             Assert.IsFalse(EntityManager.HasComponent<TweenResumeCommand>(entity));
             Assert.IsFalse(EntityManager.HasComponent<TweenStopCommand>(entity));
             Assert.IsFalse(EntityManager.HasComponent<TweenPause>(entity));
+
+            World.Update();
+
             Assert.IsFalse(EntityManager.HasComponent<TweenState>(entity));
         }
     }

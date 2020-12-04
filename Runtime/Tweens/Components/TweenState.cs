@@ -7,7 +7,6 @@ namespace Timespawn.EntityTween.Tweens
     public struct TweenState : IBufferElementData, ITweenId
     {
         internal const byte LOOP_COUNT_INFINITE = 0;
-        private const byte LOOP_COUNT_PENDING_DESTROY = byte.MaxValue;
 
         public int Id;
         public EaseType EaseType;
@@ -64,16 +63,6 @@ namespace Timespawn.EntityTween.Tweens
         public int GetTweenId()
         {
             return Id;
-        }
-
-        internal bool IsPendingDestroy()
-        {
-            return LoopCount == LOOP_COUNT_PENDING_DESTROY;
-        }
-
-        internal void SetPendingDestroy()
-        {
-            LoopCount = LOOP_COUNT_PENDING_DESTROY;
         }
 
         private int GenerateId(in double elapsedTime, in int entityInQueryIndex, in int tweenInfoTypeIndex)

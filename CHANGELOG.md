@@ -5,6 +5,7 @@
 ### Changed
 
 - `TweenDestroySystem.DestroyJob` now uses `BufferTypeHandle` instead of `BufferFromEntity`
+- Improve performance by marking tweens to be destroyed with `TweenDestroyCommand` instead of `TweenState.LoopCount == 255`
 
 ### Fixed
 

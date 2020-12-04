@@ -23,7 +23,7 @@
   "samples": [
     {
       "displayName": "Stress Test",
-      "description": "The test demonstrates lots of cubes being translated, rotated and scaled at the same time. Dependant on Hybrid Renderer (com.unity.rendering.hybrid) for rendering.",
+      "description": "The test demonstrates lots of cubes being translated, rotated and scaled at the same time. Dependent on Hybrid Renderer (com.unity.rendering.hybrid) for rendering.",
       "path": "Samples~/StressTest"
     }
   ]

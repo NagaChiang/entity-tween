@@ -16,6 +16,7 @@ namespace Timespawn.EntityTween.Tweens
             [ReadOnly] public ComponentTypeHandle<TTweenInfo> InfoType;
 
             [NativeDisableContainerSafetyRestriction] public BufferTypeHandle<TweenState> TweenBufferType;
+            [NativeDisableContainerSafetyRestriction] public BufferTypeHandle<TweenDestroyCommand> DestroyCommandType;
 
             public EntityCommandBuffer.ParallelWriter ParallelWriter;
 
@@ -24,14 +25,33 @@ namespace Timespawn.EntityTween.Tweens
                 NativeArray<Entity> entities = chunk.GetNativeArray(EntityType);
                 NativeArray<TTweenInfo> infos = chunk.GetNativeArray(InfoType);
                 BufferAccessor<TweenState> tweenBuffers = chunk.GetBufferAccessor(TweenBufferType);
+                BufferAccessor<TweenDestroyCommand> destroyBuffers = chunk.GetBufferAccessor(DestroyCommandType);
                 for (int i = 0; i < entities.Length; i++)
                 {
                     Entity entity = entities[i];
+
+                    bool shouldDestroy = false;
+                    DynamicBuffer<TweenDestroyCommand> destroyBuffer = destroyBuffers[i];
+                    for (int j = 0; j < destroyBuffer.Length; j++)
+                    {
+                        TweenDestroyCommand command = destroyBuffer[j];
+                        if (infos[i].GetTweenId() == command.Id)
+                        {
+                            shouldDestroy = true;
+                            destroyBuffer.RemoveAt(j);
+                        }
+                    }
+
+                    if (!shouldDestroy)
+                    {
+                        return;
+                    }
+
                     DynamicBuffer<TweenState> tweenBuffer = tweenBuffers[i];
                     for (int j = 0; j < tweenBuffer.Length; j++)
                     {
                         TweenState tween = tweenBuffer[j];
-                        if (infos[i].GetTweenId() == tween.Id && tween.IsPendingDestroy())
+                        if (infos[i].GetTweenId() == tween.Id)
                         {
                             tweenBuffer.RemoveAt(j);
                             ParallelWriter.RemoveComponent<TTweenInfo>(chunkIndex, entity);
@@ -43,6 +63,11 @@ namespace Timespawn.EntityTween.Tweens
                     {
                         ParallelWriter.RemoveComponent<TweenState>(chunkIndex, entity);
                     }
+
+                    if (destroyBuffer.IsEmpty)
+                    {
+                        ParallelWriter.RemoveComponent<TweenDestroyCommand>(chunkIndex, entity);
+                    }
                 }
             }
         }
@@ -51,7 +76,10 @@ namespace Timespawn.EntityTween.Tweens
 
         protected override void OnCreate()
         {
-            TweenInfoQuery = GetEntityQuery(ComponentType.ReadOnly<TTweenInfo>(), ComponentType.ReadOnly<TweenState>());
+            TweenInfoQuery = GetEntityQuery(
+                ComponentType.ReadOnly<TTweenInfo>(),
+                ComponentType.ReadOnly<TweenState>(),
+                ComponentType.ReadOnly<TweenDestroyCommand>());
         }
 
         protected override void OnUpdate()
@@ -63,6 +91,7 @@ namespace Timespawn.EntityTween.Tweens
                 EntityType = GetEntityTypeHandle(),
                 InfoType = GetComponentTypeHandle<TTweenInfo>(true),
                 TweenBufferType = GetBufferTypeHandle<TweenState>(),
+                DestroyCommandType = GetBufferTypeHandle<TweenDestroyCommand>(),
                 ParallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter(),
             };
 

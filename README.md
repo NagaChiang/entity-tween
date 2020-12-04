@@ -171,7 +171,7 @@ For example, `TweenTranslationSystem` takes `TweenState` and `TweenTranslation` 
 
 ### Checking State
 
-`TweenStateSystem` iterates all `TweenState` components checking if they're about to be looped, ping-ponged or destroyed. When `TweenState.LoopCount == 0` after being updated means it should be looped infinitely, while `TweenState.LoopCount == 255` means it's pending destroyed by `TweenDestroySystem` later.
+`TweenStateSystem` iterates all `TweenState` components checking if they're about to be looped, ping-ponged or destroyed. The tween will loop infinitely when its `TweenState.LoopCount == 0`; however, if it just ticked to 0 from 1, the system will mark it as pending destroy with `TweenDestroyCommand`;
 
 ### Destroying
 

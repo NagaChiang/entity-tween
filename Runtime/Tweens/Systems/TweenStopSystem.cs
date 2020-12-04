@@ -9,19 +9,25 @@ namespace Timespawn.EntityTween.Tweens
     {
         protected override void OnUpdate()
         {
+            BufferFromEntity<TweenDestroyCommand> destroyBufferFromEntity = GetBufferFromEntity<TweenDestroyCommand>(true);
+
             EndSimulationEntityCommandBufferSystem endSimECBSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             EntityCommandBuffer.ParallelWriter parallelWriter = endSimECBSystem.CreateCommandBuffer().AsParallelWriter();
 
             Entities
+                .WithReadOnly(destroyBufferFromEntity)
                 .WithAll<TweenStopCommand>()
                 .ForEach((int entityInQueryIndex, Entity entity, ref DynamicBuffer<TweenState> tweenBuffer) =>
                 {
                     for (int i = 0; i < tweenBuffer.Length; i++)
                     {
                         TweenState tween = tweenBuffer[i];
-                        tween.SetPendingDestroy();
+                        if (!destroyBufferFromEntity.HasComponent(entity))
+                        {
+                            parallelWriter.AddBuffer<TweenDestroyCommand>(entityInQueryIndex, entity);
+                        }
 
-                        tweenBuffer[i] = tween;    
+                        parallelWriter.AppendToBuffer(entityInQueryIndex, entity, new TweenDestroyCommand(tween.Id));
                     }
 
                     parallelWriter.RemoveComponent<TweenStopCommand>(entityInQueryIndex, entity);

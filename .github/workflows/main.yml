@@ -4,9 +4,10 @@ jobs:
   test-and-build:
     name: Test and Build (${{ matrix.unityVersion }}, ${{ matrix.platform }})
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:${{ matrix.unityVersion }}-${{ matrix.platform }}
+    container: unityci/editor:${{ matrix.unityVersion }}-${{ matrix.platform }}
     env:
-      unityCommand: /opt/Unity/Editor/Unity -batchmode -nographics -logfile /dev/stdout -quit
+      unityCommand: /opt/unity/Editor/Unity -batchmode -nographics -logfile /dev/stdout -quit
+      unityCommand-no-quit: /opt/unity/Editor/Unity -batchmode -nographics -logfile /dev/stdout
       projectPath: test-project
       buildPath: build-${{ matrix.unityVersion }}-${{ matrix.platform }}
       buildName: DefaultScene
@@ -14,9 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         unityVersion:
-          - 2020.1.10f1
+          - 2020.1.17f1
+          - 2020.2.1f1
         platform:
-          - windows
+          - windows-mono-0
     steps:
       - name: Create test project folder
         run: mkdir -p ${{ env.projectPath }}/Packages/EntityTween
@@ -35,7 +37,7 @@ jobs:
       - name: Activate and create project
         run: ${{ env.unityCommand }} -username "${{ secrets.UNITY_EMAIL }}" -password "${{ secrets.UNITY_PASSWORD }}" -serial "${{ secrets.UNITY_SERIAL }}" -createProject '${{ env.projectPath }}'
       - name: Unit tests
-        run: /opt/Unity/Editor/Unity -batchmode -nographics -logfile /dev/stdout -projectPath '${{ env.projectPath }}' -runTests -testPlatform PlayMode
+        run: ${{ env.unityCommand-no-quit }} -projectPath '${{ env.projectPath }}' -runTests -testPlatform PlayMode
       - name: Build
         run: ${{ env.unityCommand }} -projectPath '${{ env.projectPath }}' -executeMethod Timespawn.EntityTween.Editor.CI.BuildUtils.BuildDefaultScene ${{ env.buildPath }}/${{ env.buildName }} ${{ matrix.platform }}
       - name: Return license

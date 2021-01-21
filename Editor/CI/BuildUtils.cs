@@ -47,19 +47,26 @@ namespace Timespawn.EntityTween.Editor.CI
             BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
         }
 
-        // Image tags: https://hub.docker.com/r/gableroux/unity3d/tags
         private static BuildTarget PlatformToBuildTarget(string platform)
         {
-            switch (platform)
+            if (platform.Contains("windows"))
             {
-                case "windows":
-                    return BuildTarget.StandaloneWindows64;
-                case "webgl":
-                    return BuildTarget.WebGL;
-                case "android":
-                    return BuildTarget.Android;
-                case "ios":
-                    return BuildTarget.iOS;
+                return BuildTarget.StandaloneWindows64;
+            }
+
+            if (platform.Contains("webgl"))
+            {
+                return BuildTarget.WebGL;
+            }
+
+            if (platform.Contains("android"))
+            {
+                return BuildTarget.Android;
+            }
+
+            if (platform.Contains("ios"))
+            {
+                return BuildTarget.iOS;
             }
 
             Debug.LogError($"Error parsing the platform string \"{platform}\" to BuildTarget.");

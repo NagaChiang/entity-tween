@@ -1,5 +1,7 @@
 # Changelog
 
+## [Unreleased]
+
 ## [0.5.0] - 2021.01.21
 
 ### Changed

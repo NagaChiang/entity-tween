@@ -115,7 +115,7 @@ int loopCount = 1;
 
 Tween.Move(entityManager, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
 Tween.Move(commandBuffer, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
-Tween.Move(parallelWriter, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
+Tween.Move(parallelWriter, sortKey, entity, start, end, duration, EaseDesc.SmoothStep, isPingPong, loopCount);
 ```
 
 ### Stop the entity

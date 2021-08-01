@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Ended tweening entity is set back to start value ([#2](https://github.com/NagaChiang/entity-tween/issues/2))
+
 ## [0.5.0] - 2021.01.21
 
 ### Changed

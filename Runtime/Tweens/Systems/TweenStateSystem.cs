@@ -48,7 +48,10 @@ namespace Timespawn.EntityTween.Tweens
                                     tween.LoopCount--;
                                 }
 
-                                tween.Time = 0.0f;
+                                if (isInfiniteLoop || tween.LoopCount > 0)
+                                {
+                                    tween.Time = 0.0f;
+                                }
                             }
                         }
 

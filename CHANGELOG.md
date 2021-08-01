@@ -5,6 +5,7 @@
 ### Fixed
 
 - Ended tweening entity is set back to start value ([#2](https://github.com/NagaChiang/entity-tween/issues/2))
+- Multiple TweenStates are not destroyed properly at the same time
 
 ## [0.5.0] - 2021.01.21
 

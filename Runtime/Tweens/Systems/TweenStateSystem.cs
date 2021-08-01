@@ -18,6 +18,12 @@ namespace Timespawn.EntityTween.Tweens
                 .WithNone<TweenPause>()
                 .ForEach((Entity entity, int entityInQueryIndex, ref DynamicBuffer<TweenState> tweenBuffer) =>
                 {
+                    DynamicBuffer<TweenDestroyCommand> newDestroyCommandBuffer = default;
+                    if (!destroyBufferFromEntity.HasComponent(entity))
+                    {
+                        newDestroyCommandBuffer = parallelWriter.AddBuffer<TweenDestroyCommand>(entityInQueryIndex, entity);
+                    }
+
                     for (int i = tweenBuffer.Length - 1; i >= 0; i--)
                     {
                         TweenState tween = tweenBuffer[i];
@@ -57,12 +63,14 @@ namespace Timespawn.EntityTween.Tweens
 
                         if (!isInfiniteLoop && tween.LoopCount == 0)
                         {
-                            if (!destroyBufferFromEntity.HasComponent(entity))
+                            if (newDestroyCommandBuffer.IsCreated)
                             {
-                                parallelWriter.AddBuffer<TweenDestroyCommand>(entityInQueryIndex, entity);
+                                newDestroyCommandBuffer.Add(new TweenDestroyCommand(tween.Id));
                             }
-
-                            parallelWriter.AppendToBuffer(entityInQueryIndex, entity, new TweenDestroyCommand(tween.Id));
+                            else
+                            {
+                                parallelWriter.AppendToBuffer(entityInQueryIndex, entity, new TweenDestroyCommand(tween.Id));
+                            }
                         }
 
                         tweenBuffer[i] = tween;

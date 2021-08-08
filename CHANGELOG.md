@@ -4,7 +4,7 @@
 
 ### Changed
 
-- Dependency Upgrade
+- Dependency upgrade
   - Entities 0.17.0-preview.42 (from 0.14.0-preview.18)
   - Burst 1.4.9 (from 1.3.6)
 

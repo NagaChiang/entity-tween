@@ -10,6 +10,14 @@ using Unity.Tiny;
 using Unity.U2D.Entities;
 #endif
 
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenTranslationGenerateSystem.GenerateJob))]
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenRotationGenerateSystem.GenerateJob))]
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenScaleGenerateSystem.GenerateJob))]
+
+#if UNITY_TINY_ALL_0_31_0 || UNITY_2D_ENTITIES
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenTintGenerateSystem.GenerateJob))]
+#endif
+
 namespace Timespawn.EntityTween.Tweens
 {
     [UpdateInGroup(typeof(TweenGenerateSystemGroup))]
@@ -20,7 +28,7 @@ namespace Timespawn.EntityTween.Tweens
         where TTweenInfoValue : struct
     {
         [BurstCompile]
-        private struct GenerateJob : IJobChunk
+        internal struct GenerateJob : IJobChunk
         {
             [ReadOnly] public int TweenInfoTypeIndex;
             [ReadOnly] public double ElapsedTime;

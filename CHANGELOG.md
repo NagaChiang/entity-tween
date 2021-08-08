@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Dependency Upgrade
+  - Entities 0.17.0-preview.42 (from 0.14.0-preview.18)
+  - Burst 1.4.9 (from 1.3.6)
+
+### Fixed
+
+- Reflection data of generic jobs has not automatically initialized ([#1](https://github.com/NagaChiang/entity-tween/issues/1))
+
 ## [0.5.1] - 2021.08.02
 
 ### Fixed

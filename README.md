@@ -50,8 +50,8 @@ Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtim
 ## Dependency
 
 - Unity 2020.1
-- Entities 0.14.0-preview.18
-- Burst 1.3.6
+- Entities 0.17.0-preview.42
+- Burst 1.4.9
 - Mathematics 1.2.1
 
 ### Optional
@@ -142,6 +142,14 @@ if (EntityManager.HasComponent<TweenState>(entity))
     Debug.Log("It's tweening!");
 }
 ```
+
+## Known Issues
+
+### Compatibility with Unity 2021
+
+According to the [forum thread](https://forum.unity.com/threads/notice-on-dots-compatibility-with-unity-2021-1.1091800/), Entities package is not compatible with Unity 2021 until the end of 2021.
+
+> You must stay on Unity 2020 LTS and on Entities 0.17 for now. Future releases of Entities will not be compatible with Unity 2021 until the end of the year at the earliest. Upgrading to 2021.1 and using current or future Entities packages will not work and is not expected to work.
 
 ## Workflow
 

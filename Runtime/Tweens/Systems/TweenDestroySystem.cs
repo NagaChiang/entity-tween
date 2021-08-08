@@ -3,6 +3,14 @@ using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
 
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenTranslationDestroySystem.DestroyJob))]
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenRotationDestroySystem.DestroyJob))]
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenScaleDestroySystem.DestroyJob))]
+
+#if UNITY_TINY_ALL_0_31_0 || UNITY_2D_ENTITIES
+[assembly: RegisterGenericJobType(typeof(Timespawn.EntityTween.Tweens.TweenTintDestroySystem.DestroyJob))]
+#endif
+
 namespace Timespawn.EntityTween.Tweens
 {
     [UpdateInGroup(typeof(TweenDestroySystemGroup))]
@@ -10,7 +18,7 @@ namespace Timespawn.EntityTween.Tweens
         where TTweenInfo : struct, IComponentData, ITweenId
     {
         [BurstCompile]
-        private struct DestroyJob : IJobChunk
+        internal struct DestroyJob : IJobChunk
         {
             [ReadOnly] public EntityTypeHandle EntityType;
             [ReadOnly] public ComponentTypeHandle<TTweenInfo> InfoType;

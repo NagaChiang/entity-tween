@@ -4,6 +4,28 @@
 
 Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtime).
 
+## Table of Contents
+
+- [Demonstration](#demonstration)
+- [Features](#features)
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [Examples](#examples)
+  - [Move the entity](#move-the-entity)
+  - [Stop the entity](#stop-the-entity)
+  - [Loop infinitely](#loop-infinitely)
+  - [Check if the entity is tweening](#check-if-the-entity-is-tweening)
+- [Known Issues](#known-issues)
+  - [Compatibility with Unity 2021](#compatibility-with-unity-2021)
+- [Workflow](#workflow)
+  - [Command](#command)
+  - [Generation](#generation)
+  - [Easing](#easing)
+  - [Applying](#applying)
+  - [Checking State](#checking-state)
+  - [Destroying](#destroying)
+- [Donation](#donation)
+
 ## Demonstration
 
 ![](https://i.imgur.com/3GM0RCE.gif)
@@ -47,7 +69,7 @@ Entity compatible tween library for Unity ECS/DOTS and Project Tiny (DOTS Runtim
     - Smooth step
     - Crossfade
 
-## Dependency
+## Dependencies
 
 - Unity 2020.1+
 - Entities 0.17.0-preview.42

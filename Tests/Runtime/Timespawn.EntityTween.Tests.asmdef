@@ -1,5 +1,6 @@
 {
     "name": "Timespawn.EntityTween.Tests",
+    "rootNamespace": "",
     "references": [
         "Timespawn.EntityTween",
         "UnityEngine.TestRunner",
@@ -18,7 +19,7 @@
     "precompiledReferences": [
         "nunit.framework.dll"
     ],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
     ],

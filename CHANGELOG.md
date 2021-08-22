@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Test assembly definition is set to auto referenced
+
 ## [0.6.0] - 2021.08.08
 
 ### Changed
